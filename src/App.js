@@ -1,25 +1,75 @@
+import { useState, useEffect, createContext, useContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LandingPage from './landing_page/LandingPage';
+
+// Create context
+export const WindowDimensionsContext = createContext();
+
+
+const useWindowDimensions = () => {
+  const [dimensions, setDimensions] = useState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      centerX: window.innerWidth / 2,
+      centerY: window.innerHeight / 2,
+      screenWidth: window.screen.width,
+      screenHeight: window.screen.height,
+      offsetX: window.screenX,
+      offsetY: window.screenY,
+  });
+
+  useEffect(() => {
+      const handleResize = () => {
+          setDimensions({
+              width: window.innerWidth,
+              height: window.innerHeight,
+              centerX: window.innerWidth / 2,
+              centerY: window.innerHeight / 2,
+              screenHeight: window.screen.height,
+              screenWidth: window.screen.width,
+              offsetX: window.screenX,
+              offsetY: window.screenY,
+          });
+      };
+
+      
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('fullscreenchange', handleResize);
+        window.addEventListener('mozfullscreenchange', handleResize);  // For Firefox
+        window.addEventListener('webkitfullscreenchange', handleResize);  // For older versions of Safari and Chrome
+        window.addEventListener('msfullscreenchange', handleResize);  // For IE
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('fullscreenchange', handleResize);
+            window.removeEventListener('mozfullscreenchange', handleResize);
+            window.removeEventListener('webkitfullscreenchange', handleResize);
+            window.removeEventListener('msfullscreenchange', handleResize);
+        };
+    
+
+  }, []);
+
+  return dimensions;
+}
+
+
 
 function App() {
+  const windowDimensions = useWindowDimensions();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <WindowDimensionsContext.Provider value={windowDimensions}>
+      <div className="App" style={{ width: '100%', height: '100%' }}>
+        <LandingPage />
+      </div>
+    </WindowDimensionsContext.Provider>
   );
 }
 
 export default App;
+
+// Now, whenever you need to access the window dimensions within a component:
+// const { width, height } = useContext(WindowDimensionsContext);
+

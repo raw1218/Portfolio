@@ -1,0 +1,9 @@
+.particleSimulation{
+    background-color: black;
+}
+
+.particleSimulationWrapper {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
