@@ -110,6 +110,8 @@ const drawStars = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, screenWidth, screenHeight);
+
+    drawBackground(ctx);
     
     stars.forEach(star => {
         ctx.beginPath();
@@ -200,9 +202,46 @@ useEffect(() => {
 
  
 
+//track mouse position
+const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+
+useEffect(() => {
+    const handleMouseMove = (e) => {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+    };
+}, []);
 
 
 
+
+function drawBackground(ctx) {
+    // First, fill the canvas with a semi-transparent (or opaque) overlay
+    ctx.fillStyle = 'rgba(0, 0, 0, 1)'; // adjust opacity as required
+    ctx.fillRect(0, 0, screenWidth, screenHeight);
+    ctx.filter = 'blur(150px)'
+    // Set up the shadow properties for the blur effect
+ /*   ctx.shadowColor = 'black'; 
+    ctx.shadowBlur = 3000;  // adjust the blur amount
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+*/
+    // Use the "destination-out" global composite operation to "cut out" a blurry circle around the cursor
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(mousePosition.x, mousePosition.y, 100, 0, Math.PI * 2, true); // Radius of 80, you can adjust as needed
+    ctx.fill();
+
+    // Reset properties to default
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.shadowBlur = 0;
+    ctx.filter = 'none'
+}
 
 
 
