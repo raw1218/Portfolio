@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { WindowDimensionsContext } from '../App';
 import './ParticleSimulation.css';
+import backgroundImage from '../images/colorful-space-some-stars.jpg';
 
 function ParticleSimulation() {
     const { offsetX, offsetY, width, height,  screenWidth, screenHeight } = useContext(WindowDimensionsContext);
@@ -33,19 +34,31 @@ function ParticleSimulation() {
             window.removeEventListener('mouseup', handleMouseUp);
         };
     }, []);
-    
-
-
-
     useEffect(() => {
         if (hyperdriveToggled && hyperdrivePercentage < 1) {
             const interval = setInterval(() => {
-                setHyperdrivePercentage(prev => Math.min(prev + 0.01, 1));
+                setHyperdrivePercentage(prev => Math.min(prev + 0.02, 1));
                 console.log("hyperdrive = ", hyperdrivePercentage);
-            }, 50);  // Adjust interval for smoother/faster transition
+            }, 25);  // Adjust interval for smoother/faster transition
+            return () => clearInterval(interval);
+        }
+    }, [hyperdriveToggled, hyperdrivePercentage]);   
+    useEffect(() => {
+        if (!hyperdriveToggled && hyperdrivePercentage > 0) {
+            const interval = setInterval(() => {
+                setHyperdrivePercentage(prev => Math.max(prev - 0.02, 0));
+                console.log("hyperdrive = ", hyperdrivePercentage);
+            }, 25);  // Adjust interval for smoother/faster transition
             return () => clearInterval(interval);
         }
     }, [hyperdriveToggled, hyperdrivePercentage]);
+
+
+
+
+
+
+
 
     const [windowCenterX, setWindowCenterX] = useState((width / 2));
     const [windowCenterY, setWindowCenterY] = useState((height / 2));
@@ -84,80 +97,123 @@ function ParticleSimulation() {
                 y: y,
                 angle: angle,
                 size: Math.random() * 0.8,
-                velocity: Math.random() ,
-                opacity: 0.7 + Math.random() * 0.3  // Random opacity between 0.8 and 1.0
+                baseVelocity: Math.random() ,
+                opacity: 0.7 + Math.random() * 0.3,  // Random opacity between 0.8 and 1.0
+                spawn: Date.now(),
             };
         });
     };
 
     const [stars, setStars] = useState(createStars(screenWidth, screenHeight));
 
-    const drawStars = () => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, screenWidth, screenHeight);
-        
-        stars.forEach(star => {
-            const distanceFromCenter = Math.sqrt(Math.pow(star.x - windowCenterX, 2) + Math.pow(star.y - windowCenterY, 2));
-            const stretchFactor = 1 + hyperdrivePercentage * (distanceFromCenter / Math.max(screenWidth, screenHeight));
+const drawStars = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, screenWidth, screenHeight);
     
+    stars.forEach(star => {
+        ctx.beginPath();
+       // ctx.globalAlpha = star.opacity;
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "white";
+        // Calculate distance from center
+        const distanceFromCenter = Math.sqrt(Math.pow(star.x - windowCenterX, 2) + Math.pow(star.y - windowCenterY, 2));
+        const maxDistance = Math.sqrt(Math.pow(screenWidth, 2) + Math.pow(screenHeight, 2));
+        const distanceFactor = (distanceFromCenter * 2)/ maxDistance;
+
+        if (hyperdrivePercentage > 0) {
+            const baseLength = star.size;
+
+            const elapsedTime = Date.now() - star.spawn;
+            const timeFactor = Math.min(elapsedTime / 200,1)
+
+          
+            const additionalLength =  timeFactor * baseLength *  500 * hyperdrivePercentage  * distanceFactor ;  // Adjust this 20 multiplier as needed
+            const lineLength =  baseLength + ( additionalLength );
+            const endX = star.x + Math.cos(star.angle) * lineLength;
+            const endY = star.y + Math.sin(star.angle) * lineLength;
+
+            ctx.lineWidth = star.size;
             ctx.beginPath();
-            ctx.globalAlpha = star.opacity;
-    
-            if (hyperdrivePercentage > 0) {
-                // Rotate context to align with star's angle
-                ctx.save();
-                ctx.translate(star.x, star.y);
-                ctx.rotate(star.angle);
-                ctx.scale(stretchFactor, 1);
-                ctx.arc(0, 0, star.size, 0, Math.PI * 2);
-                ctx.restore();
-            } else {
-                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-            }
-            
-            ctx.fillStyle = 'white';
+            ctx.moveTo(star.x, star.y);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+
+            //ctx.fillRect(star.x - star.size / 2, star.y - lineLength / 2, star.size, lineLength);
+        } else {
+            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
             ctx.fill();
-        });
+        }
+    });
+};
+
     
-        // Rest of your draw code...
-    };
     
     
+    
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setStars(prevStars => prevStars.map(star => {
-                const dx = star.velocity * (1 + 2 * hyperdrivePercentage) * Math.cos(star.angle);
-                const dy = star.velocity * (1 + 2 * hyperdrivePercentage) * Math.sin(star.angle);
+useEffect(() => {
+    const intervalId = setInterval(() => {
+        setStars(prevStars => prevStars.map(star => {
 
-                let newX = star.x + dx;
-                let newY = star.y + dy;
+            // Calculate distance from center for velocity adjustment
+            const distanceFromCenter = Math.sqrt(Math.pow(star.x - windowCenterX, 2) + Math.pow(star.y - windowCenterY, 2));
+            const maxDistance = Math.sqrt(Math.pow(screenWidth, 2) + Math.pow(screenHeight, 2));
+            const distanceFactor = (distanceFromCenter * 2) / maxDistance;
+            var velocity;
+            // Update velocity in hyperdrive
+            if (hyperdrivePercentage > 0) {
+                velocity  = star.baseVelocity + (1 + (100 ** hyperdrivePercentage) * distanceFactor);  // 3 is a multiplier, adjust as needed
+            } else {
+                velocity = star.baseVelocity;
+            }
 
-                if (newX < 0 || newX > screenWidth || newY < 0 || newY > screenHeight) {
-                    newX = Math.random() * screenWidth;
-                    newY = Math.random() * screenHeight;
-                    const newAngle = calculateAngle(newX, newY);
-                    return {
-                        ...star,
-                        x: newX,
-                        y: newY,
-                        angle: newAngle
-                    };
-                }
+            const dx = velocity * Math.cos(star.angle);
+            const dy = velocity * Math.sin(star.angle);
+            let newX = star.x + dx;
+            let newY = star.y + dy;
 
-                return { ...star, x: newX, y: newY , angle: calculateAngle(newX, newY)};
-            }));
+            
+            star.opacity = 1;
+            if (newX < 0 || newX > screenWidth || newY < 0 || newY > screenHeight) {
+                newX = Math.random() * screenWidth;
+                newY = Math.random() * screenHeight;
+                const newAngle = calculateAngle(newX, newY);
+                return {
+                    ...star,
+                    x: newX,
+                    y: newY,
+                    angle: newAngle,
+                    spawn: Date.now(),
+                };
+            }
 
-            drawStars();
-        }, 50);
+            return { ...star, velocity: velocity, x: newX, y: newY, angle: calculateAngle(newX, newY), };
+        }));
 
-        return () => clearInterval(intervalId);
-    }, [height, width, stars]);
-
-    useEffect(() => {
         drawStars();
-    }, [stars]);
+    }, 50);
+
+    return () => clearInterval(intervalId);
+}, [height, width, stars]);
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return (
         <div className="particleSimulationWrapper">
