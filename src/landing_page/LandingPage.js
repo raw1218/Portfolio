@@ -1,10 +1,11 @@
-import React from 'react'
+import {useContext}from 'react'
 import ParticleSimulation from './ParticleSimulation'
 import './LandingPage.css'
+import { currentPageContext } from '../App'
 
 function LandingPage() {
 
-
+    const {currentPage} = useContext(currentPageContext)
 
 
   return (

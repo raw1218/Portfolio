@@ -2,12 +2,16 @@ import { useState, useEffect, createContext, useContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LandingPage from './landing_page/LandingPage';
+import Navbar from './navbar/navbar';
 
 // Create context
 export const WindowDimensionsContext = createContext();
+export const currentPageContext = createContext();
+
 
 
 const useWindowDimensions = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 750);
   const [dimensions, setDimensions] = useState({
       width: window.innerWidth,
       height: window.innerHeight,
@@ -31,6 +35,8 @@ const useWindowDimensions = () => {
               offsetX: window.screenX,
               offsetY: window.screenY,
           });
+
+          setIsMobile(window.innerWidth <= 750);
       };
 
       
@@ -57,14 +63,19 @@ const useWindowDimensions = () => {
 
 
 function App() {
+
+  const [currentPage, setCurrentPage] = useState('home');
   const windowDimensions = useWindowDimensions();
 
   return (
+    <currentPageContext.Provider value = {{currentPage, setCurrentPage}}>
     <WindowDimensionsContext.Provider value={windowDimensions}>
       <div className="App" style={{ width: '100%', height: '100%' }}>
+        <Navbar setCurrentPage={setCurrentPage}/>
         <LandingPage />
       </div>
     </WindowDimensionsContext.Provider>
+    </currentPageContext.Provider>
   );
 }
 

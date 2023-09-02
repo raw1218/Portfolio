@@ -1,0 +1,36 @@
+.navbar{
+    z-index: 2;
+    background-color: transparent;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    overflow: hidden;
+    
+}
+
+
+
+
+.navbar-item{
+    margin: 5%;
+    padding: 5%;
+    background-color: transparent;
+    border-radius: 0%;
+    border-style: solid;
+    border-color: lightgreen;
+    color: white;
+    justify-self: center;
+    align-self: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: border-radius 0.2s , background-color 0.3s;
+
+}
+
+.navbar-item.selected{
+    border-radius: 15%;
+    background-color: lightgreen;
+    color: black;
+    border-width: 0;
+
+}

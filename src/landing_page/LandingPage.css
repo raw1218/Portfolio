@@ -3,134 +3,128 @@
     justify-content: center;
     align-items: center;
     height: 100%; 
-    width: 100%; /* This will make it take the full viewport height */
-    background-color: #000;  /* Add or change based on your background color */
-    /*position: relative; /* To stack the ParticleSimulation and text content */
-
-
+    width: 100%;
+    background-color: #000;
 }
-
 
 .landing-page-main-text-overlay {
-
-    z-index: 1; /* Make sure text appears above the ParticleSimulation */
+    z-index: 1;
     text-align: center;
-
     width: 75%;
     height: 30%;
-
-    
+ 
 }
 
-
-
-
 .landing-page-main-text-overlay-upper {
-
-      z-index: 1; /* Make sure text appears above the ParticleSimulation */
-      text-align: center;
-      display:grid;
-      grid-template-columns: 1fr 3fr;
-      grid-template-rows: 1fr 1fr;
-      grid-template-areas:
-          "HelloWorld Name"
-          "MyNameIs Name";
-      grid-gap: 0;
-      row-gap: 0;
-      column-gap: 0;
-      margin-right: 25%;
-  
-  }
-
-
-
-
-
-
-
-
-  .landing-page-main-text-overlay-lower {
-
-    z-index: 1; /* Make sure text appears above the ParticleSimulation */
+    z-index: 1;
     text-align: center;
-    display:grid;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "HelloWorld Name"
+        "MyNameIs Name";
+    grid-gap: 0;
+    row-gap: 0;
+    column-gap: 0;
+    margin-right: 25%;
+}
+
+.landing-page-main-text-overlay-lower {
+    z-index: 1;
+    text-align: center;
+    display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr;
     grid-gap: 0;
     row-gap: 0;
     column-gap: 0;
     margin-left: 25%;
-
 }
-
-
-
 
 .main-text-small {
     color: white;
-   
 }
 
 .main-text-big {
     color: white;
-
+    font-size: 4vw;
 } 
+
 .computer-text {
-    
     color: lightgreen;
-    
+    font-size: 90%;
 }
 
-#IAmA{
-    
+#IAmA {
     align-self: end;
     justify-self: end;
     padding: 0;
     margin: 0;
-
-    
 }
-#MyNameIs{
+
+#MyNameIs {
     grid-area: MyNameIs;
     align-self: start;
     justify-self: end;
     margin: 0;
     padding: 0;
-
-    
-    
 }
-#Title{
-    
-    margin:0;
-    padding:0;
+
+#Title {
+    margin: 0;
+    padding: 0;
     align-self: end;
     justify-self: start;
+    font-size: 4vw;
 }
-#HelloWorld{
-    grid-area: HelloWorld;
-   margin: 0;
-   padding:0;
-   align-self: end;
-   justify-self: end;
 
-    font-size: 90%;
+#HelloWorld {
+    grid-area: HelloWorld;
+    margin: 0;
+    padding: 0;
+    align-self: end;
+    justify-self: end;
 }
-#Name{
-    
+
+#Name {
     grid-area: Name;
     justify-self: start;
     align-self: center;
     font-size: 5vw;
-   
     padding: 0;
     margin: 0;
 }
 
+/* Media Queries */
+@media (max-width: 750px) {
+
+    .landing-page-main-text-overlay {
+        z-index: 1;
+        text-align: center;
+        width: 100%;
+        height: 30%;
+    }
+
+    .landing-page-main-text-overlay-upper{
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .landing-page-main-text-overlay-upper{
+        margin-left: 0;
+        margin-right: 0;
+    }
 
 
+    #Name, #Title {
+        font-size: 45px; /* Adjust to the size you want for mobile */
+        
+    }
 
-
-
+    #Title{
+        font-size: 30px;
+    }
+}
 
 
