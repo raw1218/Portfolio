@@ -1,5 +1,6 @@
 import React from 'react'
 import './AboutPage2.css'
+import Skills from './Skills'
 function AboutPage2() {
 
 
@@ -8,18 +9,23 @@ function AboutPage2() {
   return (
     <div className='about-page-wrapper-fullscreen'>
         <div className='about-page-left-section'>
+            <div className="spacer"></div>
             <h1>About Me</h1>
-            <p>Bio Paragraph</p>
+            <div className="spacer large"></div>
+            <p>{"I'm Ronald Wood, a software engineer with a solid foundation from the University of Connecticut. To me, every line of code is a step towards understanding something new. I'm in this field because I genuinely enjoy the process, the challenges, and the continuous learning it offers."}</p>
+            <div className="spacer large"></div>
             <div className='bio-buttons'>
                 <button className='resume-button'>My resume</button>
                 <button className='contact-button'>Contact Me</button>
             </div>
+            <div className="spacer"></div>
         </div>
+
 
 
         <div className='about-page-right-section'>
             <div className='skill-carousel-wrapper'>
-                Skills
+                <Skills/>
             </div>
         </div>
     </div>

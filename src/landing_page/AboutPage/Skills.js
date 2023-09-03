@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AboutPage.css';
+import './AboutPage2.css';
 
 function Skills() {
 

@@ -10,10 +10,18 @@
 .about-page-left-section {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centering content vertically */
-    align-items: start; /* Aligning content to the left */
-    padding: 2rem; /* Some space around content */
+ 
+    
+    
     background-color: #f0f0f0; /* Placeholder color */
+}
+
+.spacer {
+    flex-grow: 1;  /* This will take up 1 part of the available space */
+}
+
+.spacer.large {
+    flex-grow: 1.618;  /* This will take up 1.618 parts of the available space */
 }
 
 .about-page-right-section {
@@ -26,10 +34,140 @@
 .bio-buttons {
     display: flex;
     gap: 1rem; /* Space between buttons */
-    margin-top: 1rem; /* Space above the buttons */
+    align-content: center;
+    justify-items: center;
+    padding: 0 5%;
 }
 
 .resume-button, .contact-button {
     /* Add your individual button styling here */
     padding: 0.5rem 1rem;
+    flex: 1;
 }
+
+
+.skill-carousel-wrapper{
+    flex: 1;
+    height: 75%;
+    width: 100%;
+    background-color: black;
+}
+
+
+
+.about-page-left-section h1{
+    font-size: 350%;
+}
+
+.about-page-left-section p{
+    font-size: 150%;
+    padding: 0 5%;
+}
+
+
+
+.skills-wrapper {
+    
+    font-size: 20px;
+    color: white;
+    border: white solid 2px;
+    
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.15fr;
+    width: 100%;
+    height:100%;
+    align-self: center;
+}
+
+
+.skills-display-wrapper {
+    display: flex;
+    justify-content: space-between; /* This will push the children apart */
+    align-items: center; /* This will vertically center the children */
+    position: relative;
+   
+}
+
+
+
+.prev-button, .next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    /* ... other styles ... */
+}
+
+.prev-button {
+    left: 0;
+}
+
+.next-button {
+    right: 0;
+}
+
+.skills-display{
+ 
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.skills-progress{
+
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+
+
+
+
+
+.carousel {
+    position: relative;
+    width: 100%;
+    text-align: center;
+  }
+  
+
+  
+  .skill {
+    display: none; 
+  }
+  
+  .skill.active {
+    display: block; 
+  }
+  
+  
+  .oval {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: darkgrey;
+    margin: 0 3vw;
+
+
+
+    transition: width 0.3s, border-radius 0.3s, background-color 0.3s, margin 0.3s
+  }
+  
+  .oval.expanded {
+    width: 4vw; 
+    margin: 0 5vw;
+    border-radius: 30%;
+    background-color: white;
+  }
+  
+  .btn-prev, .btn-next {
+    margin: 10px;
+  }
+  
