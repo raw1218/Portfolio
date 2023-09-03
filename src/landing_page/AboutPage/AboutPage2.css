@@ -154,10 +154,27 @@
     border-radius: 50%;
     background-color: darkgrey;
     margin: 0 3vw;
-
+    position: relative;
 
 
     transition: width 0.3s, border-radius 0.3s, background-color 0.3s, margin 0.3s
+  }
+
+
+  .oval::before {
+    content: '';
+    
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: -20px;
+    z-index: 5;
+    background-color: transparent;
+}
+
+  .oval:hover{
+    background-color: white;
   }
   
   .oval.expanded {

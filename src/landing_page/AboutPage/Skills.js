@@ -20,7 +20,7 @@ function Skills() {
     };
   
 
-  
+    
 
 
 
@@ -52,6 +52,7 @@ function Skills() {
             <span
               className={`oval ${activeIndex === index ? 'expanded' : ''}`}
               key={index}
+              onClick={()=>{setActiveIndex(index)}}
             ></span>
           ))}
         </div>
