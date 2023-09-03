@@ -2,9 +2,10 @@ import {useContext}from 'react'
 import ParticleSimulation from './ParticleSimulation'
 import './LandingPage.css'
 import { currentPageContext } from '../App'
-import AboutPage from './AboutPage/AboutPage'
+import AboutPage2 from './AboutPage/AboutPage2'
 import ProjectsPage from './ProjectsPage'
 import ContactPage from './ContactPage'
+
 
 function LandingPage() {
 
@@ -37,7 +38,7 @@ function LandingPage() {
 
 
       {currentPage === 'about' && (
-        <AboutPage/>
+        <AboutPage2/>
       )}
 
 

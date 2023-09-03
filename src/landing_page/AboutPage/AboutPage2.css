@@ -1,0 +1,35 @@
+.about-page-wrapper-fullscreen {
+    display: grid;
+    width: 100%;
+    height: 100%; /* Taking up the full viewport height */
+    grid-template-columns: 1fr 1.618fr; /* This time the right column is wider */
+    z-index: 1;
+
+}
+
+.about-page-left-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centering content vertically */
+    align-items: start; /* Aligning content to the left */
+    padding: 2rem; /* Some space around content */
+    background-color: #f0f0f0; /* Placeholder color */
+}
+
+.about-page-right-section {
+    display: flex;
+    align-items: center; /* Centers the skill carousel vertically */
+    justify-content: center; /* And this centers it horizontally */
+    background-color: #e0e0e0; /* Placeholder color */
+}
+
+.bio-buttons {
+    display: flex;
+    gap: 1rem; /* Space between buttons */
+    margin-top: 1rem; /* Space above the buttons */
+}
+
+.resume-button, .contact-button {
+    /* Add your individual button styling here */
+    padding: 0.5rem 1rem;
+}

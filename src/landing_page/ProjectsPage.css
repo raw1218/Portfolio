@@ -19,7 +19,7 @@
 .projects-page-right-section {
     flex: 1; 
     background-color: #A8DADC; /* Change this to any color you prefer */
-
+ 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,8 +29,14 @@
 
 .projects-page-left-section {
     flex: 1.618; 
-    background-color: red; /* Change this to any color you prefer */
+    background-color: orange;
+    display: flex;
+    flex-direction: column;  /* Add this */
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }
+
 
 h1 {
     margin-bottom: 0.618rem; /* Golden ratio for spacing */
@@ -52,8 +58,10 @@ h1 {
 }
 
 .projects {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 80%; 
-    margin: auto 0;
-    background-color: #E63946; /* Change this to any color you prefer */
+    height: 100%;
+    background-color: blue;
 }
