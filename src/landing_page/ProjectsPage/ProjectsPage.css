@@ -1,0 +1,213 @@
+.projects-page{
+    z-index: 1;
+    text-align: center;
+    width: 75%;
+    height: 30%;
+    color: white;
+    font-size: 100px;
+}
+
+
+/* ProjectsPage.css */
+.projects-page-wrapper-fullscreen {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.projects-page-right-section {
+    
+    background-color: #A8DADC; /* Change this to any color you prefer */
+ 
+    display: flex;
+    flex: 1; 
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+   
+}
+
+.projects-page-left-section {
+    flex: 1.618; 
+    background-color: orange;
+    display: flex;
+    flex-direction: column;  /* Add this */
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+
+
+.github-button {
+    
+
+    height: 10%;
+    margin: 0 5%;
+    padding: 0 5%;
+    background-color: #1D3557; /* Change this to any color you prefer */
+    color: #fff;
+  
+    border-radius: 5px;
+    transition: 0.3s;
+
+    /* Add hover effect */
+    &:hover {
+        background-color: white; /* Change to desired hover color */
+    }
+}
+
+.projects {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+
+
+.projects-page-right-section .spacer-small{
+    flex-grow: 1;
+    
+}
+
+.projects-page-right-section .spacer-large{
+    flex-grow: 1.618;
+    
+}
+
+
+
+
+
+.projects-carousel-wrapper{
+    flex: 1;
+    height: 75%;
+    width: 100%;
+    background-color: black;
+}
+
+
+
+.projects-wrapper {
+    
+    font-size: 20px;
+    color: white;
+    border: white solid 2px;
+    
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 0.15fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height:100%;
+    align-self: center;
+}
+
+
+.projects-display-wrapper {
+    display: flex;
+    justify-content: space-between; /* This will push the children apart */
+    align-items: center; /* This will vertically center the children */
+    position: relative;
+   
+}
+
+
+
+.projects-prev-button, .projects-next-button {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    /* ... other styles ... */
+}
+
+.projects-prev-button {
+    bottom: 0;
+}
+
+.projects-next-button {
+    top: 0;
+}
+
+.projects-display{
+    display:flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.projects-progress{
+
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+
+
+
+
+  
+  .project {
+    display: none; 
+  }
+  
+  .project.active {
+    display: block; 
+  }
+  
+  
+  .project-oval {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: darkgrey;
+    margin: 3vh 0;
+    position: relative;
+
+
+    transition: width 0.3s, border-radius 0.3s, background-color 0.3s, margin 0.3s
+  }
+
+
+  .project-oval::before {
+    content: '';
+    
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: -20px;
+    z-index: 5;
+    background-color: transparent;
+}
+
+  .project-oval:hover{
+    background-color: white;
+  }
+  
+  .project-oval.expanded {
+    height: 4vw; 
+    margin: 5vh 0;
+    border-radius: 30%;
+    background-color: white;
+  }
+  
+  .btn-prev, .btn-next {
+    margin: 10px;
+  }
+  
