@@ -4,7 +4,7 @@ import './LandingPage.css'
 import { currentPageContext } from '../App'
 import AboutPage2 from './AboutPage/AboutPage2'
 import ProjectsPage from './ProjectsPage/ProjectsPage'
-import ContactPage from './ContactPage'
+import ContactPage from './ContactPage/ContactPage'
 
 
 function LandingPage() {

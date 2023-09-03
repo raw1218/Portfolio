@@ -1,0 +1,103 @@
+.contact-page {
+    z-index: 1;
+    text-align: center;
+    width: 75%;
+    height: 30%;
+    color: white;
+    font-size: 100px;
+}
+
+
+.contact-page-wrapper-fullscreen {
+    display: grid;
+    width: 100%;
+    height: 100%; /* This assumes you want it to take up the full viewport height */
+    grid-template-columns: 1.618fr 1fr;
+    z-index: 1;
+}
+
+.contact-page-left-section {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+
+    background-color: #e6e6e6; /* Placeholder color */
+}
+
+
+.contact-page-left-section .spacer-small{
+    flex-grow: 1;
+}
+
+.contact-page-left-section .spacer-large{
+    flex-grow: 1.618;
+}
+
+.contact-form-wrapper{
+    
+    flex: calc(1.618 * 2);
+    background-color: darkgrey;
+
+}
+
+.contact-page-right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This centers the contact info vertically */
+    justify-content: center; /* And this centers it horizontally */
+    background-color: #d4d4d4; /* Placeholder color */
+}
+
+.contact-info {
+    /* Add your styling for contact info section here */
+    padding: 1rem;
+   
+}
+
+
+.contact-page-right-section .spacer-small{
+    flex-grow: 1;
+}
+
+.contact-page-right-section .spacer-large{
+    flex-grow: 1.618;
+}
+
+
+.contact-form {
+
+   
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* adjust this value as needed for spacing between rows */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height:100%;
+}
+
+.name-wrapper, .personal-info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* adjust this value for spacing between first name/last name and email/phone inputs */
+}
+
+.first-name-form, .last-name-form, .email-form, .phone-number-form {
+    flex: 1; /* equally divide space */
+    padding: 10px; /* adjust for desired internal padding */
+    border: 1px solid #ccc; /* style border as needed */
+    border-radius: 4px; /* optional for rounded corners */
+    outline: none;
+}
+
+.message-form {
+    padding: 10px; /* adjust for desired internal padding */
+    border: 1px solid #ccc; /* style border as needed */
+    border-radius: 4px; /* optional for rounded corners */
+    height: 120px; /* adjust as needed for desired textarea height */
+    outline: none;
+    resize: vertical; /* allows vertical resizing */
+    flex: 1;
+}
+

@@ -30,12 +30,12 @@
 
 .projects-page-left-section {
     flex: 1.618; 
-    background-color: orange;
+    background-color: grey;
     display: flex;
     flex-direction: column;  /* Add this */
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    
 }
 
 
@@ -85,16 +85,17 @@
 
 
 .projects-carousel-wrapper{
-    flex: 1;
+   
     height: 75%;
     width: 100%;
-    background-color: black;
+    background-color: grey;
 }
 
 
 
 .projects-wrapper {
     
+    background-color: black;
     font-size: 20px;
     color: white;
     border: white solid 2px;
