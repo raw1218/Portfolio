@@ -8,7 +8,7 @@ import './navbar.css'
 const Navbar = ({ setCurrentPage }) => {
     const { width } = useContext(WindowDimensionsContext);
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [selectedKey, setSelectedKey] = useState(2);
+    const [selectedKey, setSelectedKey] = useState(1);
 
 
     const mobileThreshold = 750; // or whatever pixel threshold you prefer
