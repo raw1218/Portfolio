@@ -18,12 +18,12 @@ function ParticleSimulation() {
     useEffect(() => {
         const handleMouseDown = () => {
             setHyperdriveToggled(true);
-            console.log("hyperdrive on!");
+            
         };
     
         const handleMouseUp = () => {
             setHyperdriveToggled(false);
-            console.log("hyperdrive off");
+            
         };
     
         window.addEventListener('mousedown', handleMouseDown);
@@ -38,7 +38,6 @@ function ParticleSimulation() {
         if (hyperdriveToggled && hyperdrivePercentage < 1) {
             const interval = setInterval(() => {
                 setHyperdrivePercentage(prev => Math.min(prev + 0.02, 1));
-                console.log("hyperdrive = ", hyperdrivePercentage);
             }, 25);  // Adjust interval for smoother/faster transition
             return () => clearInterval(interval);
         }
@@ -47,7 +46,6 @@ function ParticleSimulation() {
         if (!hyperdriveToggled && hyperdrivePercentage > 0) {
             const interval = setInterval(() => {
                 setHyperdrivePercentage(prev => Math.max(prev - 0.02, 0));
-                console.log("hyperdrive = ", hyperdrivePercentage);
             }, 25);  // Adjust interval for smoother/faster transition
             return () => clearInterval(interval);
         }

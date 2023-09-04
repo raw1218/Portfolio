@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useSpring, animated, config, onRest } from 'react-spring';
+
 import './AboutPage2.css';
 
 
@@ -29,10 +31,12 @@ function Skills() {
 
 
  
- 
+ const [isTransitioning, setIsTransitioning] = useState(false);
+ const [targetIndex, setTargetIndex] = useState(1);
+ const [targetDirection, setTargetDirection]= useState('right');
   
 
-    const skills = [{title: "HTML / CSS / Javascript",  icons: [htmlIcon, cssIcon, jsIcon, websiteIcon]},
+    const skills = [{title: "HTML / CSS / Javascript",  icons: [htmlIcon, cssIcon, jsIcon]},
                     {title: "C / C++", icons: [cIcon, cPlusPlusIcon]},
                   {title: "Java / C#", icons: [javaIcon, cSharpIcon]},
                   {title: "Python", icons: [pythonIcon]},
@@ -45,17 +49,78 @@ function Skills() {
     
     
     const [activeIndex, setActiveIndex] = useState(0);
+
+
+    const handleTransitionFinished = () => {
+      //setActiveIndex(targetIndex);
+      //setTargetIndex((prevIndex) => (prevIndex + 1) % skills.length);
+
+
+      //console.log("TRANSITION FINISHED\n\n");
+    }
   
-    const nextSkill = () => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % skills.length);
-    };
+    const [animationProps, setAnimationProps] = useSpring(() => ({
+      left: '0%',
+      config: config.default,
+      onRest: () => {handleTransitionFinished(); console.log("animation rested")}
+    }))
+
+    /*const [leftAnimationProps, setLeftAnimationProps] = useSpring(() => ({
+      left: '-100%',
+      config:  config.stiff,
+     
+    }))
+
+    const [rightAnimationProps, setRightAnimationProps] = useSpring(() => ({
+      left: '100%',
+      config: config.stiff,
+      
+    }))
+*/
+
+
+const nextSkill = () => {
+  console.log("prev active index = ", activeIndex, "target index = ", targetIndex);
+
+  setTargetIndex((prevTargetIndex) => {
+    const newTargetIndex = (activeIndex + 1) % skills.length;
+    console.log("active index = ", activeIndex, "new target index = ", newTargetIndex);
+
+    const str  = '-' + 100 * newTargetIndex + '%';
+    setAnimationProps({left: str});
+
+    setActiveIndex(newTargetIndex);
+
+    return newTargetIndex; // This will set the targetIndex state.
+  });
+};
+
   
     const prevSkill = () => {
-      setActiveIndex((prevIndex) => (prevIndex - 1 + skills.length) % skills.length);
+
+      setTargetIndex((prevTargetIndex) => {
+        var newTargetIndex = (activeIndex - 1);
+        if(newTargetIndex < 0)newTargetIndex = skills.length - 1;
+        console.log("active index = ", activeIndex, "new target index = ", newTargetIndex);
+    
+        const str  = '-' + 100 * newTargetIndex + '%';
+        setAnimationProps({left: str});
+    
+        setActiveIndex(newTargetIndex);
+    
+        return newTargetIndex; // This will set the targetIndex state.
+      });
     };
   
 
-    
+    const oppositeDirection = targetDirection === 'left' ? 'right' : 'left';
+
+    const defaultClassName = 'skill';
+    const activeClassName = isTransitioning ? 'skill target ' + oppositeDirection : 'skill active';
+    const targetClassName = isTransitioning ? 'skill active' : 'skill target ' + targetDirection;
+   
+    const targetProps = null // targetDirection === 'left' ? leftAnimationProps : rightAnimationProps;
+
 
 
 
@@ -67,19 +132,21 @@ function Skills() {
         <div className = 'skills-display-wrapper'>
 
 
-          <div className = 'skills-display'> 
+          <animated.div style = {animationProps} className = 'skills-display'> 
           {skills.map((skill, index) => (
 
             
             <div
-              className={`skill ${activeIndex === index ? 'active' : ''}`}
+
+              style={{ display: 'block', position: 'absolute', left: `${index * 100}%`}}
+              className={activeClassName}
               key={index}
             >
               <Skill skill_obj = {skill}/>
             </div>
           ))}
 
-          </div>
+          </animated.div>
           <button onClick={prevSkill} className="prev-button">Previous</button>
           <button onClick={nextSkill} className="next-button">Next</button>
 
