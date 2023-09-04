@@ -72,7 +72,7 @@ function App() {
     <WindowDimensionsContext.Provider value={windowDimensions}>
       <div className="App" style={{ width: '100%', height: '100%' }}>
         <Navbar setCurrentPage={setCurrentPage}/>
-        <LandingPage />
+        <LandingPage/>
       </div>
     </WindowDimensionsContext.Provider>
     </currentPageContext.Provider>
