@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSpring, animated, config, onRest } from 'react-spring';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useSpring, animated, config, onRest, immediate} from 'react-spring';
 
 import './AboutPage2.css';
 
@@ -49,79 +49,123 @@ function Skills() {
     
     
     const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndexProgress, setActiveIndexProgress] = useState(0);
+
+    useEffect(()=>{
+      setActiveIndexProgress(()=>{return activeIndex})
+    }, [activeIndex]);
 
 
-    const handleTransitionFinished = () => {
-      //setActiveIndex(targetIndex);
-      //setTargetIndex((prevIndex) => (prevIndex + 1) % skills.length);
-
-
-      //console.log("TRANSITION FINISHED\n\n");
-    }
+    const handleTransitionFinished = () => {}
   
     const [animationProps, setAnimationProps] = useSpring(() => ({
       left: '0%',
       config: config.default,
-      onRest: () => {handleTransitionFinished(); console.log("animation rested")}
+      onRest: handleTransitionFinished,
     }))
 
-    /*const [leftAnimationProps, setLeftAnimationProps] = useSpring(() => ({
-      left: '-100%',
-      config:  config.stiff,
-     
-    }))
-
-    const [rightAnimationProps, setRightAnimationProps] = useSpring(() => ({
-      left: '100%',
-      config: config.stiff,
-      
-    }))
-*/
 
 
-const nextSkill = () => {
-  console.log("prev active index = ", activeIndex, "target index = ", targetIndex);
 
-  setTargetIndex((prevTargetIndex) => {
-    const newTargetIndex = (activeIndex + 1) % skills.length;
-    console.log("active index = ", activeIndex, "new target index = ", newTargetIndex);
+    const nextSkill = () => {
+      console.log("prev active index = ", activeIndex, "target index = ", targetIndex);
+    
+      setTargetIndex(() => {
+        const newTargetIndex = (activeIndex + 1) % skills.length;
+        console.log("active index = ", activeIndex, "new target index = ", newTargetIndex);
+    
+        setActiveIndexProgress(newTargetIndex);
+        setTargetDirection('right');
 
-    const str  = '-' + 100 * newTargetIndex + '%';
-    setAnimationProps({left: str});
-
-    setActiveIndex(newTargetIndex);
-
-    return newTargetIndex; // This will set the targetIndex state.
-  });
-};
+    
+       
+        setAnimationProps({left: '-100%', onRest: ()=>{
+          console.log("transition finished bitch");
+          setActiveIndex(newTargetIndex);
+          setAnimationProps({left: '0%' , onRest : ()=>{}, immediate:true})
+        }});
+        return newTargetIndex; // This will set the targetIndex state.
+      });
+  };
 
   
     const prevSkill = () => {
+      console.log("prev active index = ", activeIndex, "target index = ", targetIndex);
+    
+      setTargetIndex(() => {
+        var newTargetIndex = activeIndex - 1;
+        if(newTargetIndex < 0) newTargetIndex = skills.length - 1;
 
-      setTargetIndex((prevTargetIndex) => {
-        var newTargetIndex = (activeIndex - 1);
-        if(newTargetIndex < 0)newTargetIndex = skills.length - 1;
+
         console.log("active index = ", activeIndex, "new target index = ", newTargetIndex);
     
-        const str  = '-' + 100 * newTargetIndex + '%';
-        setAnimationProps({left: str});
+        setActiveIndexProgress(newTargetIndex);
+        setTargetDirection('left');
+
     
-        setActiveIndex(newTargetIndex);
-    
+       
+        setAnimationProps({left: '100%', onRest: ()=>{
+          console.log("transition finished bitch");
+          setActiveIndex(newTargetIndex);
+          setAnimationProps({left: '0%' , onRest : ()=>{}, immediate:true})
+        }});
         return newTargetIndex; // This will set the targetIndex state.
       });
+
     };
+
+
+
+    const gotoSkill = (i) => {
+      console.log("prev active index = ", activeIndex, "target index = ", targetIndex);
+    
+      if(i === activeIndex)return;
+
+      setTargetIndex(() => {
+        
+        const direction = i > activeIndex ? 'right' : 'left'
+    
+        setActiveIndexProgress(i);
+        setTargetDirection(direction);
+
+        const str = direction === 'right' ? '-100%' : '100%';
+       
+        setAnimationProps({left: str, onRest: ()=>{
+          console.log("transition finished bitch");
+          setActiveIndex(i);
+          setAnimationProps({left: '0%' , onRest : ()=>{}, immediate:true})
+        }});
+        return i; // This will set the targetIndex state.
+      });
+  };
   
 
     const oppositeDirection = targetDirection === 'left' ? 'right' : 'left';
 
+
+    const activeClassName = 'skill active'
+    const targetClassName = 'skill target ' + targetDirection;
     const defaultClassName = 'skill';
-    const activeClassName = isTransitioning ? 'skill target ' + oppositeDirection : 'skill active';
-    const targetClassName = isTransitioning ? 'skill active' : 'skill target ' + targetDirection;
    
-    const targetProps = null // targetDirection === 'left' ? leftAnimationProps : rightAnimationProps;
+
+    const _triggerTransition = (target, direction) => {
+
+      console.log("pre trigger transition, active = ", activeIndex, "target = ", targetIndex);
+      setTargetDirection(direction);
+      setTargetIndex(target);
+      console.log("post trigger transition, active = ", activeIndex, "target = ", targetIndex);
+
+    }
+
+    const triggerTransition = () => {
 
 
+      if(targetDirection === 'right')setAnimationProps({left: '-100%', onRest: handleTransitionFinished});
+      if(targetDirection === 'left')setAnimationProps({left: '100%', onRest : handleTransitionFinished});
+
+
+      console.log("post post post trigger transition , active =", activeIndex, "target index = ", targetIndex)
+    }
 
 
   return (
@@ -138,8 +182,8 @@ const nextSkill = () => {
             
             <div
 
-              style={{ display: 'block', position: 'absolute', left: `${index * 100}%`}}
-              className={activeClassName}
+              
+              className={index === activeIndex ? activeClassName : index === targetIndex ? targetClassName : defaultClassName }
               key={index}
             >
               <Skill skill_obj = {skill}/>
@@ -154,9 +198,9 @@ const nextSkill = () => {
         <div className = 'skills-progress'>
           {skills.map((_, index) => (
             <span
-              className={`oval ${activeIndex === index ? 'expanded' : ''}`}
+              className={`oval ${activeIndexProgress === index ? 'expanded' : ''}`}
               key={index}
-              onClick={()=>{setActiveIndex(index)}}
+              onClick={()=>{gotoSkill(index)}}
             ></span>
           ))}
         </div>
