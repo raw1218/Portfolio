@@ -1,13 +1,14 @@
 import React from 'react'
 import './ProjectsPage.css'
-import ProjectsCarousel from './ProjectsCarousel'
+
+import Projects from './Projects'
 
 function ProjectsPage() {
   return (
     <div className='projects-page-wrapper-fullscreen'>
       <div className='projects-page-left-section'>
         <div className='projects-carousel-wrapper'>
-          <ProjectsCarousel/>
+          <Projects/>
         </div>
       </div>
 
