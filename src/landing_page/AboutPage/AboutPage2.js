@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './AboutPage2.css'
 import Skills from './Skills'
+
+import { currentPageContext } from '../../App';
+
 function AboutPage2() {
 
 
 
+    const {currentPage, setCurrentPage} = useContext(currentPageContext);
+
+    function openResume() {
+        window.open('/Ronald_Wood_Resume.pdf', '_blank');
+    }
+
+    function gotoContactPage(){
+        setCurrentPage('contact');
+    }
 
   return (
     <div className='about-page-wrapper-fullscreen'>
@@ -15,8 +27,8 @@ function AboutPage2() {
             <p>{"I'm Ronald Wood, a software engineer with a solid foundation from the University of Connecticut. To me, every line of code is a step towards understanding something new. I'm in this field because I genuinely enjoy the process, the challenges, and the continuous learning it offers."}</p>
             <div className="spacer large"></div>
             <div className='bio-buttons'>
-                <button className='resume-button'>My resume</button>
-                <button className='contact-button'>Contact Me</button>
+                <button className='resume-button' onClick={openResume}>My Resume</button>
+                <button className='contact-button' onClick={gotoContactPage}>Contact Me</button>
             </div>
             <div className="spacer"></div>
         </div>

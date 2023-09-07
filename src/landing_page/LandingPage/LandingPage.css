@@ -7,6 +7,25 @@
     background-color: #000;
 }
 
+.landing-page-wrapper .spacer.small{
+    flex: 1;
+}
+
+.landing-page-wrapper .spacer.large{
+    flex: 1.618;
+}
+
+.landing-page-main-wrapper {
+    z-index: 1;
+   
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .landing-page-main-text-overlay {
     z-index: 1;
     text-align: center;
@@ -85,6 +104,7 @@
     padding: 0;
     align-self: end;
     justify-self: end;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #Name {
@@ -94,6 +114,123 @@
     font-size: 5vw;
     padding: 0;
     margin: 0;
+}
+
+
+.projects-page-button {
+    flex: 1;
+    width: 32%;
+    background-color: transparent;
+    border: 2px solid transparent;
+    color: transparent;
+    font-size: 200%;
+    font-family: 'Courier New', Courier, monospace;
+    animation: button-spawn-main 1.5s forwards;
+  
+    overflow: hidden;
+    width: 0%;
+    height: 0%;
+    white-space: nowrap;
+    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.projects-page-button:hover{
+    background-color: lightgreen;
+    color: black;
+    width: 50%;
+    height: 32%;
+    animation: none;
+    
+}
+
+.projects-page-button-clicked {
+    flex: 1;
+    animation: button-despawn-main forwards 1.5s;
+    background-color: lightgreen;
+    color: black;
+    width: 50%;
+    height: 32%;
+    background-color: transparent;
+    border: 2px solid transparent;
+    color: none;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 200%;
+    
+    
+}
+
+
+@keyframes button-spawn-main {
+    0% {
+        width: 0%;
+        height: 0%;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+        color: lightgreen;
+    }
+
+    50%{
+        width: 50%;
+        height: 0%;
+        color: lightgreen;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: lightgreen;
+        border-top-color: lightgreen;
+    }
+
+    100%{
+        width: 50%;
+        height:32%;
+        border-left-color: lightgreen;
+        border-right-color: lightgreen;
+        border-bottom-color: lightgreen;
+        border-top-color: lightgreen;
+        color: lightgreen;
+
+        
+        
+    }
+}
+
+
+@keyframes button-despawn-main {
+    0% {
+        width: 50%;
+        height:32%;
+        border-left-color: lightgreen;
+        border-right-color: lightgreen;
+        border-bottom-color: lightgreen;
+        border-top-color: lightgreen;
+        color: lightgreen;
+    }
+
+    50%{
+        width: 50%;
+        height: 0%;
+        color: lightgreen;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: lightgreen;
+        border-top-color: lightgreen;
+    }
+
+    100%{
+
+
+        width: 0%;
+        height: 0%;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+        color: transparent;
+        
+    }
 }
 
 /* Media Queries */

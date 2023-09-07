@@ -73,7 +73,8 @@ function Project({project_obj}) {
 
     return (
         <div className='displayed-project'>
-            <div className='project-title'>{title}</div>
+            
+            <h2 className='project-title'>{title}</h2>
             <div 
                 className='project-image-wrapper' 
                 onMouseMove={handleMouseEnter} 

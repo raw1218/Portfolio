@@ -22,6 +22,8 @@ import javaIcon from '../../images/SVGS/java.svg'
 import lightbulbIcon from '../../images/SVGS/lightbulb.svg'
 import pythonIcon from '../../images/SVGS/python.svg'
 import reactIcon from '../../images/SVGS/react.svg'
+import leftArrow from '../../images/SVGS/leftArrow.svg'
+import rightArrow from '../../images/SVGS/rightArrow.svg'
 
 import Skill from './Skill';
 
@@ -191,8 +193,12 @@ function Skills() {
           ))}
 
           </animated.div>
-          <button onClick={prevSkill} className="prev-button">Previous</button>
-          <button onClick={nextSkill} className="next-button">Next</button>
+          <button onClick={prevSkill} className="prev-button">
+            <img src = {leftArrow}></img>
+          </button>
+          <button onClick={nextSkill} className="next-button">
+            <img src = {rightArrow}></img>
+          </button>
 
         </div>
         <div className = 'skills-progress'>

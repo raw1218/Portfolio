@@ -13,7 +13,11 @@ import webApp1Square from '../../images/ProjectImages/WebApp1Square.PNG'
 import webApp2Square from '../../images/ProjectImages/WebApp2Square.PNG'
 import webApp1Long from '../../images/ProjectImages/WebApp1Long.PNG'
 import webApp2Long from '../../images/ProjectImages/WebApp2Long.PNG'
+import moreProjects1 from '../../images/ProjectImages/blueprint.jpg'
+import moreProjects2 from '../../images/ProjectImages/coding.jpg'
 
+import upArrow from '../../images/SVGS/upArrow.svg'
+import downArrow from '../../images/SVGS/downArrow.svg'
 
 function Projects() {
  
@@ -25,7 +29,7 @@ function Projects() {
     const projects = [
         {
             title: "Custom Programming Language", 
-            longImages : [programmingLanguage2Long, programmingLanguage1Long], 
+            longImages : [programmingLanguage2Long, programmingLanguage1Square], 
             squareImages: [programmingLanguage1Square, programmingLanguage2Square],
             description: 'I designed the unique syntax and semantics of a custom programming language and implemented its compiler in C.'},
 
@@ -37,8 +41,8 @@ function Projects() {
 
         {
             title: "More to Come!", 
-            longImages : [null, null], 
-            squareImages: [null, null], 
+            longImages : [moreProjects1, moreProjects2], 
+            squareImages: [moreProjects1, moreProjects2], 
             description: "I am going to create more projects in the future."},
     ]
        
@@ -56,6 +60,8 @@ function Projects() {
      
        const [animationProps, setAnimationProps] = useSpring(() => ({
          top: '0%',
+        
+
          config: config.default,
          onRest: handleTransitionFinished,
        }))
@@ -195,8 +201,12 @@ function Projects() {
              ))}
    
              </animated.div>
-             <button onClick={prevProject} className="projects-prev-button">Previous</button>
-             <button onClick={nextProject} className="projects-next-button">Next</button>
+             <button onClick={prevProject} className="projects-prev-button">
+                <img src = {downArrow}></img>
+             </button>
+             <button onClick={nextProject} className="projects-next-button">
+                <img src = {upArrow}></img>
+             </button>
    
            </div>
 

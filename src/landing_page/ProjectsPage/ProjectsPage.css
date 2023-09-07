@@ -7,7 +7,15 @@
     font-size: 100px;
 }
 
+.projects-page-description {
+    flex: 1;
+    font-size: 150%;
+    padding: 5%;
+}
 
+.projects-page-title {
+    flex: 1;
+}
 /* ProjectsPage.css */
 .projects-page-wrapper-fullscreen {
     display: flex;
@@ -18,8 +26,9 @@
 
 .projects-page-right-section {
     
-    background-color: #A8DADC; /* Change this to any color you prefer */
+    /*background-color: #f0f0f0; /* Change this to any color you prefer */
  
+    color: white;
     display: flex;
     flex: 1; 
     flex-direction: column;
@@ -28,9 +37,13 @@
    
 }
 
+.projects-page-right-section h1 {
+    font-size: 300%;
+}
+
 .projects-page-left-section {
     flex: 1.618; 
-    background-color: grey;
+    
     display: flex;
     flex-direction: column;  /* Add this */
     justify-content: center;
@@ -41,21 +54,28 @@
 
 
 
+
+
 .github-button {
     
 
     height: 10%;
     margin: 0 5%;
     padding: 0 5%;
-    background-color: #1D3557; /* Change this to any color you prefer */
-    color: #fff;
+    background-color: transparent; /* Change this to any color you prefer */
+    color: lightgreen;
+
+    border: 2px solid lightgreen;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
   
     border-radius: 5px;
     transition: 0.3s;
 
     /* Add hover effect */
     &:hover {
-        background-color: white; /* Change to desired hover color */
+        background-color: lightgreen; /* Change to desired hover color */
+        color: black;
     }
 }
 
@@ -65,7 +85,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: blue;
+
 }
 
 
@@ -86,19 +106,19 @@
 
 .projects-carousel-wrapper{
    
-    height: 75%;
+    height: 90%;
     width: 100%;
-    background-color: grey;
+    
 }
 
 
 
 .projects-wrapper {
     
-    background-color: black;
+    
     font-size: 20px;
     color: white;
-    border: white solid 2px;
+  
     
     box-sizing: border-box;
     display: grid;
@@ -107,6 +127,7 @@
     width: 100%;
     height:100%;
     align-self: center;
+  
 }
 
 
@@ -117,18 +138,87 @@
     position: relative;
 
     overflow: hidden;
+    margin:  0 5%;
+  
+  
     
 }
 
+.projects-next-button, .projects-prev-button {
+    width: 5vw;  /* Percentage-based width */
+    height: 5vh; /* Percentage-based height */
+   
+    position: absolute;  /* Set as a reference for absolute positioning */
+    display: flex;      /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: transparent;
+    border: none;
+    z-index: 2;
+    align-self: center;
+    justify-self: center;
+    transform: translateX(-50%);
+}
 
+.projects-next-button::before, .projects-prev-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(max(5vw, 5vh));
+    height: calc(max(5vw, 5vh));
+    border-radius: 50%;  /* Makes it a circle */
+    background-color: rgba(0,0,0,0.75);
+    transform: translate(-50%, -50%);  /* Centers the pseudo-element */
+    z-index: 1;  /* Puts the circle behind the content of the div */
+}
+
+.projects-next-button img, .projects-prev-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This will make the image cover the entire parent, possibly cropping it */
+    display: block; 
+    z-index: 3;
+}
 
 .projects-prev-button, .projects-next-button {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    
     z-index: 10;
+    width: 5vw;
+    height: 5vh;
     /* ... other styles ... */
+
+
 }
+
+.projects-prev-button img {
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.projects-next-button img {
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.projects-next-button::before, .projects-prev-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(max(5vw, 5vh));
+    height: calc(max(5vw, 5vh));
+    border-radius: 50%;  /* Makes it a circle */
+    background-color: rgba(0,0,0,0.75);
+    transform: translate(-50%, -50%);  /* Centers the pseudo-element */
+    z-index: 1;  /* Puts the circle behind the content of the div */
+}
+
+
 
 .projects-prev-button {
     bottom: 0;
@@ -146,7 +236,9 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    
+
+
+
 
 }
 
@@ -221,6 +313,7 @@
     width: 100%;
     height: 100%;
     
+    
   
 
     
@@ -241,6 +334,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+
     
    
  
@@ -284,7 +379,9 @@
 
 
 
-
+  .project{
+   
+  }
 
 
   .project.target.down{
@@ -295,6 +392,7 @@
     height: 100%;
     position: absolute;
     top: -100%;
+
 
   }
 
@@ -307,7 +405,8 @@
     height: 100%;
     position: absolute;
     top: 100%;
-   
+ 
+    
   }
 
 
@@ -324,9 +423,16 @@
     height: 100%;
   }
 
+  .project-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .project-image-wrapper{
     position: relative;
     overflow: hidden;
+    
   }
 
   .project-image-wrapper img {
@@ -362,6 +468,8 @@
     color: white;
     flex: 1;
   }
+
+
 
 
 
@@ -492,12 +600,84 @@
 }
 
 .project-image-wrapper-left-upper.expanded {
-    transform: scale(1.11q  aaq 1);
+    transform: scale(1.1);
 }
 
 .project-image-wrapper-right-lower.expanded {
     transform: scale(1.1);
 }
+
+
+.view-code-button, .view-demo-button {
+    border: none;
+}
+
+@keyframes button-spawn1 {
+    0% {
+        width: 0%;
+        height: 0%;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+        color: black;
+    }
+
+    50%{
+        width: 50%;
+        height: 0%;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: black;
+        border-top-color: black;
+    }
+
+    100%{
+        width: 50%;
+        height:32%;
+        border-left-color: black;
+        border-right-color: black;
+        border-bottom-color: black;
+        border-top-color: black;
+        
+    }
+}
+
+
+
+@keyframes button-spawn2 {
+    0% {
+        width: 0%;
+        height: 0%;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+        color: black;
+        background-color: transparent;
+    }
+
+    50%{
+        width: 50%;
+        height: 0%;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: black;
+        border-top-color: black;
+    }
+
+    100%{
+        width: 50%;
+        height:32%;
+        border-left-color: black;
+        border-right-color: black;
+        border-bottom-color: black;
+        border-top-color: black;
+        
+    }
+}
+
+
 
 
 
@@ -513,7 +693,15 @@
     justify-content: center;
     left: 25%;
     top: 16%;
+    animation: button-spawn1 0.5s forwards;
+    will-change: width, height, color;
+    overflow: hidden;
+    border: 2px solid black;
+    box-sizing: border-box;
+
 }
+
+
 
 
 .view-demo-button{
@@ -527,6 +715,9 @@
     justify-content: center;
     left: 25%;
     bottom: 16%;
+    animation: button-spawn2 0.5s forwards;
+    overflow: hidden;
+    border: 2px solid black;
 }
 
 

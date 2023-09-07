@@ -2,20 +2,20 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { WindowDimensionsContext } from '../../App';
 import './ParticleSimulation.css';
 import backgroundImage from '../../images/colorful-space-some-stars.jpg';
+import { currentPageContext } from '../../App';
 
-function ParticleSimulation() {
+function ParticleSimulation({hyperdriveToggled, setHyperdriveToggled}) {
     const { offsetX, offsetY, width, height,  screenWidth, screenHeight } = useContext(WindowDimensionsContext);
     
+    const {currentPage} = useContext(currentPageContext)
 
-
-    const [hyperdriveToggled, setHyperdriveToggled] = useState(false);
     const [hyperdrivePercentage, setHyperdrivePercentage] = useState(0);
     const toggleHyperdrive = () => {
         setHyperdriveToggled(!hyperdriveToggled);
     };
 
 
-    useEffect(() => {
+  /*  useEffect(() => {
         const handleMouseDown = () => {
             setHyperdriveToggled(true);
             
@@ -34,6 +34,8 @@ function ParticleSimulation() {
             window.removeEventListener('mouseup', handleMouseUp);
         };
     }, []);
+
+    */
     useEffect(() => {
         if (hyperdriveToggled && hyperdrivePercentage < 1) {
             const interval = setInterval(() => {
@@ -230,7 +232,7 @@ function drawBackground(ctx) {
     ctx.shadowOffsetY = 0;
 */
     // Use the "destination-out" global composite operation to "cut out" a blurry circle around the cursor
-    ctx.globalCompositeOperation = 'destination-out';
+    ctx.globalCompositeOperation = currentPage === 'projects' ? 'none' : 'destination-out';
     ctx.beginPath();
     ctx.arc(mousePosition.x, mousePosition.y, 100, 0, Math.PI * 2, true); // Radius of 80, you can adjust as needed
     ctx.fill();

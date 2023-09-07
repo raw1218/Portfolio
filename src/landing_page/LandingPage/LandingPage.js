@@ -14,6 +14,7 @@ function LandingPage() {
     const [cursorVisible, setCursorVisible] = useState(true);
 
 
+    const [hyperdriveToggled, setHyperdriveToggled] = useState(false);
 
 
 
@@ -22,12 +23,12 @@ function LandingPage() {
    
 
     <div class = "landing-page-wrapper">
-        <ParticleSimulation/>
+        <ParticleSimulation hyperdriveToggled={hyperdriveToggled} setHyperdriveToggled={setHyperdriveToggled}/>
 
 
         
       {currentPage === 'home' && (
-        <LandingPageMain/>
+        <LandingPageMain hyperdriveToggled={hyperdriveToggled} setHyperdriveToggled={setHyperdriveToggled}/>
       )}
 
 

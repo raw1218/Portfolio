@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import NavbarItem from './navbarItem';
-import { WindowDimensionsContext } from '../App';  // Ensure correct path
+import { WindowDimensionsContext , currentPageContext} from '../App';  // Ensure correct path
 import './navbar.css'
 
 
 
-const Navbar = ({ setCurrentPage }) => {
+const Navbar = () => {
     const { width } = useContext(WindowDimensionsContext);
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [selectedKey, setSelectedKey] = useState(1);
@@ -14,7 +14,15 @@ const Navbar = ({ setCurrentPage }) => {
     const mobileThreshold = 750; // or whatever pixel threshold you prefer
     
 
+    const {currentPage, setCurrentPage} = useContext(currentPageContext);
 
+
+    useEffect(()=> {
+        if(currentPage === 'home')setSelectedKey(1);
+        if(currentPage === 'about')setSelectedKey(2);
+        if(currentPage === 'projects')setSelectedKey(3);
+        if(currentPage === 'contact')setSelectedKey(4);
+    }, [currentPage])
 
 
     if (width <= mobileThreshold) {
