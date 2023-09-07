@@ -22,7 +22,7 @@ import javaIcon from '../../images/SVGS/java.svg'
 import lightbulbIcon from '../../images/SVGS/lightbulb.svg'
 import pythonIcon from '../../images/SVGS/python.svg'
 import reactIcon from '../../images/SVGS/react.svg'
-import websiteIcon from '../../images/SVGS/website.svg'
+
 import Skill from './Skill';
 
 

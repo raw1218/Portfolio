@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { WindowDimensionsContext } from '../App';
+import { WindowDimensionsContext } from '../../App';
 import './ParticleSimulation.css';
-import backgroundImage from '../images/colorful-space-some-stars.jpg';
+import backgroundImage from '../../images/colorful-space-some-stars.jpg';
 
 function ParticleSimulation() {
     const { offsetX, offsetY, width, height,  screenWidth, screenHeight } = useContext(WindowDimensionsContext);

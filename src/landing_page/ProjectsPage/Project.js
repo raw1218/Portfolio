@@ -25,14 +25,7 @@ function Project({project_obj}) {
     const clipPathRightLowerExpanded = 'polygon(0 100%, 0 32%, 100% 32%, 100% 100%)'
 
 
-    const [{ clipPathLeftUpper }, setClipPathLeftUpper] = useSpring(() => ({
-        clipPathLeftUpper: clipPathLeftUpperNeutral
-    }));
 
-    // Spring for lower right image
-    const [{ clipPathRightLower }, setClipPathRightLower] = useSpring(() => ({
-        clipPathRightLower: clipPathRightLowerNeutral
-    }));
 
 
     const handleMouseEnter = (e) => {
@@ -45,21 +38,21 @@ function Project({project_obj}) {
         var m = rect.height / rect.width;
         var b = 0;
         
-        if(hovered === 'lower'){
-            m = 0; b = rect.height * 0.68;
-        }
-        if(hovered === 'upper'){
+        if(hovered === 'left'){
             m = 0; b = rect.height * 0.32;
         }
-        console.log("x = ", relX, "y = ", relY, "m = ", m, "expected y = ", m * relX)
+        if(hovered === 'right'){
+            m = 0; b = rect.height * 0.68;
+            
+
+        }
+        console.log("x = ", relX, "y = ", relY, "m = ", m, "expected y = ", (m * relX) + b)
 
         if (relY > (m * relX) + b) {
             setHovered('left');
-            setClipPathLeftUpper({ clipPathLeftUpper: clipPathLeftUpperExpanded });
-            setClipPathRightLower({ clipPathRightLower: clipPathRightLowerContracted });
+
         } else {
-            setClipPathLeftUpper({ clipPathLeftUpper: clipPathLeftUpperContracted });
-            setClipPathRightLower({ clipPathRightLower: clipPathRightLowerExpanded });
+
             setHovered('right');
         }
 
@@ -67,16 +60,16 @@ function Project({project_obj}) {
 
     const handleMouseLeave = () => {
         setHovered(null);
-        setClipPathLeftUpper({ clipPathLeftUpper: clipPathLeftUpperNeutral });
-        setClipPathRightLower({ clipPathRightLower: clipPathRightLowerNeutral });
+
     };
 
 
 
 
     const leftClassName = 'project-image left upper ' + (hovered === 'left' ? 'expanded' : hovered === 'right' ? 'contracted' : '');
+    const leftWrapperClassName = 'project-image-wrapper-left-upper ' + (hovered === 'left' ? 'expanded' : hovered === 'right' ? 'contracted' : '');
     const rightClassName = 'project-image right lower ' + (hovered === 'right' ? 'expanded' : hovered === 'left' ? 'contracted' : '');
-    
+    const rightWrapperClassName = 'project-image-wrapper-right-lower ' +  (hovered === 'right' ? 'expanded' : hovered === 'left' ? 'contracted' : '');
 
     return (
         <div className='displayed-project'>
@@ -92,7 +85,11 @@ function Project({project_obj}) {
                     <div 
                         className={`${leftClassName} left-transition-${state}`}
                     >
+
+                    {(hovered === 'left' ) && <button className='view-code-button'>Code</button>}
+                    <div className={leftWrapperClassName}>
                         <img src={longImages[0]} alt="Upper image"></img>
+                        </div>
                     </div>
                 )}
             </Transition>
@@ -101,7 +98,11 @@ function Project({project_obj}) {
                     <div 
                         className={`${rightClassName} right-transition-${state}`}
                     >
+                    {(hovered === 'right' ) && <button className='view-demo-button'>Demo</button>}
+
+                    <div className = {rightWrapperClassName}>
                         <img src={longImages[1]} alt="Lower image"></img>
+                    </div>
                     </div>
                 )}
             </Transition>

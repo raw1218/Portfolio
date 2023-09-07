@@ -15,7 +15,7 @@ function Skill({skill_obj}) {
             {icons.map((icon) => (
 
                 <div className='displayed-skill-icon'>
-            <img src = {icon} alt={title}/>
+            {<img src = {icon} alt={title}/>}
                 </div>
             ))}
 

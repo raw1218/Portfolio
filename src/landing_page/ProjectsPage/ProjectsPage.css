@@ -364,22 +364,93 @@
   }
 
 
-  .project-image {
+
+
+  
+@keyframes circularMotionLeft {
+
+
+    0% {
+        
+        transform: translate(0,0);
+    }
+  
+    
+    50% {
+        transform:  translate(4%,2%);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+}
+
+@keyframes circularMotionRight {
+
+
+    0% {
+        
+        transform: translate(0,0);
+    }
+  
+    
+    50% {
+        transform:  translate(-4%,-2%);
+    }
+
+    100% {
+        transform:  translate(0,0);
+    }
+}
+
+
+
+.project-image.left.upper img {
+
+    animation: circularMotionLeft 15s infinite linear;
+    will-change: transform;
+}
+
+.project-image.right.lower img {
+
+    animation: circularMotionRight 15s infinite linear;
+    will-change: transform;
+}
+
+
+
+.project-image {
     transition: clip-path 300ms ease-in-out;
+}
+
+.project-image img {
+    transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+    
 }
 
 .project-image.left.upper{
     left: 0;
     clip-path: polygon(0 0, 100% 0, 100% 0,  0 100%);
+   
 }
 
 .project-image.right.lower{
     right: 0;
     clip-path: polygon(0 100%, 0 100%, 100% 0, 100% 100%);
+    
+
 }
 
 .project-image.left.upper.expanded {
     clip-path: polygon(0 0, 100% 0%, 100% 68%, 0 68%);
+   
+
+}
+
+.project-image.left.upper.expanded img {
+    filter: blur(2px);
+    animation: none;
+    
 }
 
 .project-image.left.upper.contracted {
@@ -390,7 +461,76 @@
     clip-path: polygon(0 100%, 0 32%, 100% 32%, 100% 100%);
 }
 
+
+
+.project-image.right.lower.expanded img {
+    filter: blur(2px);
+    animation: none;
+    
+}
+
 .project-image.right.lower.contracted {
     clip-path: polygon(0 100%, 0 68%, 100% 68%, 100% 100%);
 }
+
+
+
+.project-image-wrapper-left-upper {
+    margin: 0;
+    padding: 0;
+    transform: scale(1.3);
+    transition: transform 0.3s ease-in-out;
+
+}
+
+
+.project-image-wrapper-right-lower {
+    margin: 0;
+    padding: 0;
+    transform: scale(1.3);
+    transition: transform 0.3s ease-in-out;    
+}
+
+.project-image-wrapper-left-upper.expanded {
+    transform: scale(1.11q  aaq 1);
+}
+
+.project-image-wrapper-right-lower.expanded {
+    transform: scale(1.1);
+}
+
+
+
+
+.view-code-button{
+    background-color: lightgreen;
+    position: absolute;
+    width: 50%;
+    height: 32%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 25%;
+    top: 16%;
+}
+
+
+.view-demo-button{
+    background-color: lightgreen;
+    position: absolute;
+    width: 50%;
+    height: 32%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 25%;
+    bottom: 16%;
+}
+
+
+
+
+
 
