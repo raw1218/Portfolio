@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect, useLayoutEffect} from 'react'
 import { useSpring, animated } from 'react-spring';
 import {Transition} from 'react-transition-group'
 
@@ -12,19 +12,58 @@ function Project({project_obj}) {
     const [hovered, setHovered] = useState(null);
 
     const imageWrapperRef = useRef(null);
+    const imageWrapperCircleRef = useRef(null);
 
     
+    const [imageDimensions, setImageDimensions] = useState(() => {
+        if (imageWrapperRef.current && imageWrapperCircleRef.current) {
+            const rect = imageWrapperRef.current.getBoundingClientRect();
+            const circleRect = imageWrapperCircleRef.current.getBoundingClientRect();
+            const left = circleRect.left - rect.left;
+            const top = circleRect.top - rect.top;
+            return { left: left, top: top, width: rect.width, height: rect.height };
+        }
+        return { left: 0, top: 0, width: 0, height: 0 };
+    });   
+   
 
 
+    useLayoutEffect(() => {
+        if (imageWrapperRef.current && imageWrapperCircleRef.current) {
 
-    const clipPathLeftUpperNeutral = 'polygon(0 0, 100% 0, 100% 0,  0 100%)'
-    const clipPathRightLowerNeutral = 'polygon(0 100%, 0 100%, 100% 0, 100% 100%)'
-    const clipPathLeftUpperExpanded = 'polygon(0 0, 100% 0%, 100% 68%, 0 68%)'
-    const clipPathRightLowerContracted = 'polygon(0 100%, 0 68%, 100% 68%, 100% 100%)'
-    const clipPathLeftUpperContracted = 'polygon(0 0%, 100% 0%, 100% 32%, 0 32%)'
-    const clipPathRightLowerExpanded = 'polygon(0 100%, 0 32%, 100% 32%, 100% 100%)'
+            
 
 
+            const rect = imageWrapperRef.current.getBoundingClientRect();
+            const circleRect = imageWrapperCircleRef.current.getBoundingClientRect();
+            const left = circleRect.left - rect.left;
+            const top  = circleRect.top - rect.top;
+            if( imageDimensions.left === left && imageDimensions.width === rect.width && imageDimensions.height === rect.height)return;
+            if (rect.width !== 0 && rect.height !== 0) {
+
+                const left = circleRect.left - rect.left;
+                const top  = circleRect.top - rect.top;
+                setImageDimensions({ top:top, left:left, width: rect.width, height: rect.height });
+            }
+        }
+    });
+    
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (imageWrapperRef.current) {
+                const rect = imageWrapperRef.current.getBoundingClientRect();
+                const circleRect = imageWrapperCircleRef.current.getBoundingClientRect();
+
+                const left = circleRect.left - rect.left;
+                const top = circleRect.top - rect.top;
+                setImageDimensions({ left: left, top: top, width: rect.width, height: rect.height });
+            }
+        };
+    
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
 
 
@@ -71,25 +110,34 @@ function Project({project_obj}) {
     const rightClassName = 'project-image right lower ' + (hovered === 'right' ? 'expanded' : hovered === 'left' ? 'contracted' : '');
     const rightWrapperClassName = 'project-image-wrapper-right-lower ' +  (hovered === 'right' ? 'expanded' : hovered === 'left' ? 'contracted' : '');
 
+
+    const circleWrapperDimension = Math.min(imageDimensions.width, imageDimensions.height);
+    var circleWrapperStyle = {width:circleWrapperDimension, height: circleWrapperDimension};
+    const wrapperStyle = { left: -imageDimensions.left + 'px', width:imageDimensions.width, height:imageDimensions.height};
+
+    console.log("wrapper style = ", wrapperStyle)
     return (
         <div className='displayed-project'>
             
             <h2 className='project-title'>{title}</h2>
+            
             <div 
                 className='project-image-wrapper' 
-                onMouseMove={handleMouseEnter} 
-                onMouseLeave={handleMouseLeave} 
+
                 ref={imageWrapperRef}
             >
+            <div                 onMouseMove={handleMouseEnter} 
+                onMouseLeave={handleMouseLeave} className={'project-image-wrapper-circle ' + (hovered != null ? 'hovered' : '') } style = {circleWrapperStyle} ref = {imageWrapperCircleRef}>
             <Transition in={hovered === 'left'} timeout={300}>
                 {(state) => (
                     <div 
                         className={`${leftClassName} left-transition-${state}`}
+                      style = {wrapperStyle}
                     >
 
                     {(hovered === 'left' ) && <button className='view-code-button'>Code</button>}
-                    <div className={leftWrapperClassName}>
-                        <img src={longImages[0]} alt="Upper image"></img>
+                    <div className={leftWrapperClassName}   >
+                        <img  style = {{width: imageDimensions.width, height: imageDimensions.height}} src={longImages[0]} alt="Upper image"></img>
                         </div>
                     </div>
                 )}
@@ -97,16 +145,18 @@ function Project({project_obj}) {
             <Transition in={hovered === 'right'} timeout={300}>
                 {(state) => (
                     <div 
+                        style={wrapperStyle}
                         className={`${rightClassName} right-transition-${state}`}
                     >
                     {(hovered === 'right' ) && <button className='view-demo-button'>Demo</button>}
 
-                    <div className = {rightWrapperClassName}>
-                        <img src={longImages[1]} alt="Lower image"></img>
+                    <div className = {rightWrapperClassName}    >
+                        <img style = {{width: imageDimensions.width, height: imageDimensions.height}} src={longImages[1]} alt="Lower image"></img>
                     </div>
                     </div>
                 )}
             </Transition>
+            </div>
             </div>
             <p className='project-description'>{description}</p>
         </div>

@@ -39,6 +39,7 @@
 
 .projects-page-right-section h1 {
     font-size: 300%;
+
 }
 
 .projects-page-left-section {
@@ -137,7 +138,7 @@
     align-items: center; /* This will vertically center the children */
     position: relative;
 
-    overflow: hidden;
+    
     margin:  0 5%;
   
   
@@ -176,7 +177,6 @@
 .projects-next-button img, .projects-prev-button img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* This will make the image cover the entire parent, possibly cropping it */
     display: block; 
     z-index: 3;
 }
@@ -416,14 +416,51 @@
   }
 
 
-  .project-title , .project-image-wrapper
+ .project-image-wrapper, .project-title
   {
     flex: 1;
-    width: 100%;
-    height: 100%;
+    
   }
 
+  .project-image-wrapper{
+    flex: 1.618;
+    width: 100%;
+    height: 100%;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  }
+
+  .project-image-wrapper-circle {
+    
+   
+    
+    z-index: 99;
+  
+    box-sizing: border-box;
+    border-radius: 50%;
+    position: absolute;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: 0.3s ease-in-out;
+    
+  }
+
+  .project-image-wrapper-circle.hovered {
+    border-radius: 10%;
+  }
+
+  
   .project-title{
+
+    flex: 0.5;
+    
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -431,7 +468,7 @@
 
   .project-image-wrapper{
     position: relative;
-    overflow: hidden;
+   
     
   }
 
@@ -443,7 +480,8 @@
   }
 
   .project-image {
-    position: absolute;
+  
+    align-self: center;
     top: 0;
     left: 0;
     width: 100%;
@@ -451,15 +489,24 @@
     background-size: cover;
   }
 
-.project-image.left.upper , .project-image.right.lower{
+.project-image.left.upper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
+   
     
 }
+
+.project-image.right.lower{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
 
 
 
@@ -523,6 +570,7 @@
 
     animation: circularMotionRight 15s infinite linear;
     will-change: transform;
+  
 }
 
 
@@ -544,6 +592,7 @@
 
 .project-image.right.lower{
     right: 0;
+    bottom: 0;
     clip-path: polygon(0 100%, 0 100%, 100% 0, 100% 100%);
     
 
@@ -600,11 +649,11 @@
 }
 
 .project-image-wrapper-left-upper.expanded {
-    transform: scale(1.1);
+    transform: scale(0.9);
 }
 
 .project-image-wrapper-right-lower.expanded {
-    transform: scale(1.1);
+    transform: scale(0.9);
 }
 
 

@@ -29,7 +29,7 @@ function Projects() {
     const projects = [
         {
             title: "Custom Programming Language", 
-            longImages : [programmingLanguage2Long, programmingLanguage1Square], 
+            longImages : [programmingLanguage2Long, programmingLanguage1Long], 
             squareImages: [programmingLanguage1Square, programmingLanguage2Square],
             description: 'I designed the unique syntax and semantics of a custom programming language and implemented its compiler in C.'},
 
