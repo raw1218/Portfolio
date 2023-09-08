@@ -28,6 +28,10 @@
 
 }
 
+.navbar-item:hover{
+    border-radius: 15%;
+}
+
 .navbar-item.selected{
     border-radius: 15%;
     background-color: lightgreen;

@@ -9,6 +9,20 @@ function Project({project_obj}) {
     const squareImages = project_obj.squareImages;
     const longImages = project_obj.longImages;
     const description = project_obj.description;
+    const demoLink = project_obj.demoLink;
+    const codeLink  = project_obj.codeLink;
+    const special = project_obj.special === true;
+
+
+
+    function openCode(){
+        window.open(codeLink, '_blank');
+    }
+    function openDemo(){
+        window.open(demoLink, '_blank');
+    }
+
+
     const [hovered, setHovered] = useState(null);
 
     const imageWrapperRef = useRef(null);
@@ -27,6 +41,18 @@ function Project({project_obj}) {
     });   
    
 
+    const [dummyState, setDummyState] = useState(0);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setDummyState(prevState => prevState + 1);
+      }, 200);
+  
+      return () => clearTimeout(timer); // Cleanup the timeout if the component is unmounted
+    }, []);
+
+
+
 
     useLayoutEffect(() => {
         if (imageWrapperRef.current && imageWrapperCircleRef.current) {
@@ -38,15 +64,14 @@ function Project({project_obj}) {
             const circleRect = imageWrapperCircleRef.current.getBoundingClientRect();
             const left = circleRect.left - rect.left;
             const top  = circleRect.top - rect.top;
-            if( imageDimensions.left === left && imageDimensions.width === rect.width && imageDimensions.height === rect.height)return;
-            if (rect.width !== 0 && rect.height !== 0) {
+           if( imageDimensions.left === left && imageDimensions.width === rect.width && imageDimensions.height === rect.height)return;
+            if (rect.width !== 0 && rect.height !== 0 ) {
 
-                const left = circleRect.left - rect.left;
-                const top  = circleRect.top - rect.top;
+              
                 setImageDimensions({ top:top, left:left, width: rect.width, height: rect.height });
             }
         }
-    });
+    }, );
     
 
     useEffect(() => {
@@ -114,7 +139,8 @@ function Project({project_obj}) {
     const circleWrapperDimension = Math.min(imageDimensions.width, imageDimensions.height);
     var circleWrapperStyle = {width:circleWrapperDimension, height: circleWrapperDimension};
     const wrapperStyle = { left: -imageDimensions.left + 'px', width:imageDimensions.width, height:imageDimensions.height};
-
+   // const buttonStyle = {width: circleWrapperDimension / 4, height: circleWrapperDimension / 6};
+    const buttonStyle = {}
     console.log("wrapper style = ", wrapperStyle)
     return (
         <div className='displayed-project'>
@@ -126,16 +152,29 @@ function Project({project_obj}) {
 
                 ref={imageWrapperRef}
             >
-            <div                 onMouseMove={handleMouseEnter} 
+
+            
+            <div      onMouseMove={handleMouseEnter} 
                 onMouseLeave={handleMouseLeave} className={'project-image-wrapper-circle ' + (hovered != null ? 'hovered' : '') } style = {circleWrapperStyle} ref = {imageWrapperCircleRef}>
+           
+           {(!special && hovered === 'left'  ) && <button style = {buttonStyle} className='view-code-button' onClick={openCode}>Code</button>}
+           {(!special && hovered === 'right' ) && <button style = {buttonStyle} className='view-demo-button' onClick={openDemo}>Demo</button>}
+           {(special && hovered === 'left'  ) && <button style = {buttonStyle} className='view-code-button special' onClick={openCode}>Stay Tuned!</button>}
+           {(special && hovered === 'right' ) && <button style = {buttonStyle} className='view-demo-button special' onClick={openDemo}>Coming Up!</button>}
+
+
+
             <Transition in={hovered === 'left'} timeout={300}>
+
+
+
                 {(state) => (
+                    
                     <div 
                         className={`${leftClassName} left-transition-${state}`}
                       style = {wrapperStyle}
                     >
 
-                    {(hovered === 'left' ) && <button className='view-code-button'>Code</button>}
                     <div className={leftWrapperClassName}   >
                         <img  style = {{width: imageDimensions.width, height: imageDimensions.height}} src={longImages[0]} alt="Upper image"></img>
                         </div>
@@ -148,7 +187,7 @@ function Project({project_obj}) {
                         style={wrapperStyle}
                         className={`${rightClassName} right-transition-${state}`}
                     >
-                    {(hovered === 'right' ) && <button className='view-demo-button'>Demo</button>}
+                    
 
                     <div className = {rightWrapperClassName}    >
                         <img style = {{width: imageDimensions.width, height: imageDimensions.height}} src={longImages[1]} alt="Lower image"></img>

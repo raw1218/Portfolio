@@ -5,14 +5,14 @@ import Project from './Project';
 
 import './ProjectsPage.css'
 
-import programmingLanguage1Square from '../../images/ProjectImages/ProgrammingLanguage1Square.PNG'
+import programmingLanguage1Square from '../../images/ProjectImages/ProgrammingLanguage1Square2.PNG'
 import programmingLanguage2Square from '../../images/ProjectImages/ProgrammingLanguage2Square.PNG'
 import programmingLanguage1Long from '../../images/ProjectImages/ProgrammingLanguage1Long.PNG'
-import programmingLanguage2Long from '../../images/ProjectImages/ProgrammingLanguage2Long.PNG'
+import programmingLanguage2Long from '../../images/ProjectImages/ProgrammingLanguage2Long2.PNG'
 import webApp1Square from '../../images/ProjectImages/WebApp1Square.PNG'
 import webApp2Square from '../../images/ProjectImages/WebApp2Square.PNG'
-import webApp1Long from '../../images/ProjectImages/WebApp1Long.PNG'
-import webApp2Long from '../../images/ProjectImages/WebApp2Long.PNG'
+import webApp1Long from '../../images/ProjectImages/WebApp1Long2.PNG'
+import webApp2Long from '../../images/ProjectImages/WebApp2Long2.PNG'
 import moreProjects1 from '../../images/ProjectImages/blueprint.jpg'
 import moreProjects2 from '../../images/ProjectImages/coding.jpg'
 
@@ -29,21 +29,30 @@ function Projects() {
     const projects = [
         {
             title: "Custom Programming Language", 
-            longImages : [programmingLanguage2Long, programmingLanguage1Long], 
+            longImages : [programmingLanguage2Long, programmingLanguage1Square], 
             squareImages: [programmingLanguage1Square, programmingLanguage2Square],
-            description: 'I designed the unique syntax and semantics of a custom programming language and implemented its compiler in C.'},
+            description: 'I designed the unique syntax and semantics of a custom programming language and implemented its compiler in C.',
+            codeLink: 'https://github.com/raw1218/CustomProgrammingLanguage',
+            demoLink:'https://quickstart-image-yogrloifxq-uc.a.run.app/notebooks/OPEN_ME.ipynb',
+        },
+           
 
         {
             title: "Search Algorithm Web App", 
             longImages: [webApp1Long, webApp2Long],
             squareImages: [webApp1Square, webApp2Square],
-            description: "I created a React web app that visualizes various search algorithms."},
+            description: "I created a React web app that visualizes various search algorithms.",
+            codeLink: 'https://github.com/raw1218/SearchAlgorithmWebApp',
+            demoLink:'https://raw1218.github.io/SearchAlgorithmWebApp/',
+
+        },
 
         {
             title: "More to Come!", 
             longImages : [moreProjects1, moreProjects2], 
             squareImages: [moreProjects1, moreProjects2], 
-            description: "I am going to create more projects in the future."},
+            description: "I am going to create more projects in the future.",
+            special: true},
     ]
        
        

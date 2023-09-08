@@ -22,7 +22,8 @@
     margin: 0;
     padding: 0;
 
-    background-color: #e6e6e6; /* Placeholder color */
+    color: white;
+    padding:  0 5%;
 }
 
 
@@ -36,8 +37,9 @@
 
 .contact-form-wrapper{
     
-    flex: calc(1.618 * 2);
-    background-color: darkgrey;
+    flex: calc(1.618 * 3);
+    
+   
 
 }
 
@@ -46,13 +48,14 @@
     flex-direction: column;
     align-items: center; /* This centers the contact info vertically */
     justify-content: center; /* And this centers it horizontally */
-    background-color: #d4d4d4; /* Placeholder color */
+    background-color: transparent;
+    color: white;
 }
 
 .contact-info {
     /* Add your styling for contact info section here */
     padding: 1rem;
-   
+    display: flex;
 }
 
 
@@ -86,23 +89,77 @@
 .first-name-form, .last-name-form, .email-form, .phone-number-form {
     flex: 1; /* equally divide space */
     padding: 10px; /* adjust for desired internal padding */
-    border: 1px solid #ccc; /* style border as needed */
+    border: 2px solid lightgreen; /* style border as needed */
     border-radius: 4px; /* optional for rounded corners */
-    outline: none;
+    
+    color: white;
+    background-color: transparent;
+
+}
+
+.message-form::placeholder, .first-name-form::placeholder, .last-name-form::placeholder, .phone-number-form::placeholder, .email-form::placeholder{
+    color:rgba(144,238,144,0.75)
 }
 
 .message-form {
     padding: 10px; /* adjust for desired internal padding */
-    border: 1px solid #ccc; /* style border as needed */
+    border: 2px solid lightgreen; /* style border as needed */
     border-radius: 4px; /* optional for rounded corners */
     height: 120px; /* adjust as needed for desired textarea height */
-    outline: none;
+    color: white;
     resize: vertical; /* allows vertical resizing */
     flex: 1;
+    background-color: transparent;
+    
 }
+
+
 
 
 .submit-button {
     border: none;
+    flex: 0.5;
+    width: 50%;
+    align-self: center;
+    justify-self: center;
+    border-radius: 3%;
+    background-color: transparent;
+    color: white;
+    border : 2px solid white;
+    transition: 0.3s ease-in-out;
 }
+
+.submit-button:hover{
+    background-color: white;
+    color: black;
+}
+
+
+.contact-info ul {
+    list-style: none; /* Reset default list styles */
+    padding-left: 0;  /* Remove default padding */
+}
+
+.contact-info-item {
+    display: flex;         /* Make it a flex container */
+    align-items: center;   /* Vertically center children */
+    justify-content: start; /* Horizontally center the content */
+    margin-bottom: 1rem;   /* Space between each item */
+}
+
+.contact-info-item img {
+    margin-right: 1rem;  /* Space between icon and text */
+    width: 20px;           /* Assign a fixed width */
+    height: 20px;          /* Assign a fixed height */
+    flex: 0 0 auto;   
+    display: inline;     /* This prevents the image from shrinking or growing */
+}
+
+
+
+
+
+
+
+
 

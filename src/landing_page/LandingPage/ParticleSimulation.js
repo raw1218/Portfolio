@@ -232,7 +232,7 @@ function drawBackground(ctx) {
     ctx.shadowOffsetY = 0;
 */
     // Use the "destination-out" global composite operation to "cut out" a blurry circle around the cursor
-    ctx.globalCompositeOperation = currentPage === 'projects' ? 'none' : 'destination-out';
+    ctx.globalCompositeOperation = 'destination-out';
     ctx.beginPath();
     ctx.arc(mousePosition.x, mousePosition.y, 100, 0, Math.PI * 2, true); // Radius of 80, you can adjust as needed
     ctx.fill();

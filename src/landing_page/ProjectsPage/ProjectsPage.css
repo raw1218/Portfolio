@@ -566,6 +566,20 @@
     will-change: transform;
 }
 
+.project-image.left.upper.expanded img {
+
+    animation: circularMotionLeft 15s infinite linear;
+    will-change: transform;
+}
+
+.project-image.left.upper.contracted img {
+
+    animation: circularMotionLeft 15s infinite linear;
+    will-change: transform;
+}
+
+
+
 .project-image.right.lower img {
 
     animation: circularMotionRight 15s infinite linear;
@@ -673,7 +687,7 @@
     }
 
     50%{
-        width: 50%;
+        width: 68%;
         height: 0%;
         border-left-color: transparent;
         border-right-color: transparent;
@@ -682,8 +696,8 @@
     }
 
     100%{
-        width: 50%;
-        height:32%;
+        width: 68%;
+        height:16%;
         border-left-color: black;
         border-right-color: black;
         border-bottom-color: black;
@@ -703,11 +717,11 @@
         border-bottom-color: transparent;
         border-top-color: transparent;
         color: black;
-        background-color: transparent;
+      
     }
 
     50%{
-        width: 50%;
+        width: 68%;
         height: 0%;
         border-left-color: transparent;
         border-right-color: transparent;
@@ -716,8 +730,8 @@
     }
 
     100%{
-        width: 50%;
-        height:32%;
+        width: 68%;
+        height:16%;
         border-left-color: black;
         border-right-color: black;
         border-bottom-color: black;
@@ -732,41 +746,116 @@
 
 
 .view-code-button{
-    background-color: lightgreen;
+    background-color:rgba(0,0,0,0.7);
+    color: lightgreen;
+
+    text-shadow: 0 0 10px lightgreen, 0 0 5px lightgreen; /* This creates the glow effect */
+
+    box-shadow: 0 0 10px lightgreen, 0 0 5px black; /* This creates the glow effect */
+
     position: absolute;
-    width: 50%;
-    height: 32%;
+    width: 68%;
+    height: 16%;
     z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
-    left: 25%;
+    left: 16%;
     top: 16%;
     animation: button-spawn1 0.5s forwards;
     will-change: width, height, color;
     overflow: hidden;
-    border: 2px solid black;
+   
     box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    border-radius: 5%;
 
+    transition: 0.3s ease-in-out;
+   
+    letter-spacing: 2px;
+
+}
+
+.view-code-button.special{
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.view-code-button.special:hover{
+    color:lightgreen;
+    box-shadow: none;
+    letter-spacing: 2px;
+    text-shadow: none;
+
+}
+
+.view-code-button:hover{
+   /* background-color: lightgreen;*/
+    
+    color: white;
+
+    text-shadow: 0 0 10px white, 0 0 5px white; /* This creates the glow effect */
+
+    box-shadow: 0 0 10px white, 0 0 5px white;
+    letter-spacing: 5px;
 }
 
 
 
 
 .view-demo-button{
-    background-color: lightgreen;
+
+    
+   
+    background-color:rgba(0,0,0,0.7);
+    color: white;
+
+    text-shadow: 0 0 10px white, 0 0 5px white; /* This creates the glow effect */
+
+    box-shadow: 0 0 10px white, 0 0 5px black; /* This creates the glow effect */
+
     position: absolute;
-    width: 50%;
+    width: 75%;
     height: 32%;
     z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
-    left: 25%;
+    left: 16%;
     bottom: 16%;
     animation: button-spawn2 0.5s forwards;
     overflow: hidden;
-    border: 2px solid black;
+    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    border-radius: 5%;
+    transition: 0.3s ease-in-out;
+    letter-spacing: 2px;
+}
+
+.view-demo-button.special{
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.view-demo-button.special:hover{
+    color: white;
+    box-shadow: none;
+    text-shadow: none;
+    letter-spacing: 2px;
+}
+
+.view-demo-button:hover {
+
+   /* background-color:white;*/
+    color: lightgreen;
+
+   text-shadow: 0 0 5px lightgreen, 0 0 2px lightgreen; /* This creates the glow effect */
+
+    box-shadow: 0 0 10px lightgreen, 0 0 5px lightgreen; /* This creates the glow effect */
+
+    letter-spacing: 5px;
 }
 
 

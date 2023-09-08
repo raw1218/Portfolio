@@ -1,6 +1,14 @@
 import React from 'react'
 import './ContactPage.css'
 import ContactForm from './ContactForm'
+
+
+import emailIcon from '../../images/SVGS/email.svg'
+import phoneIcon from '../../images/SVGS/phone.svg'
+import locationIcon from '../../images/SVGS/location.svg'
+import githubIcon from '../../images/SVGS/github.svg'
+import linkedInIcon from '../../images/SVGS/linkedin.svg'
+
 function ContactPage() {
   return (
 
@@ -12,7 +20,7 @@ function ContactPage() {
       <div className='spacer-small'></div>
         <h1 className='title'>Contact Me</h1>
         <div className='spacer-small'></div>
-        <p className='description'>Whether you have a question about my projects, need assistance, or just want to say hello, I'd love to hear from you. Fill out the form below, and I'll get back to you as soon as possible."</p>
+        <p className='description'>Whether you have a question about my projects, need assistance, or just want to say hello, I'd love to hear from you. Fill out the form below, and I'll get back to you as soon as possible.</p>
         <div className='spacer-small'></div>
         <div className='contact-form-wrapper'>
           <ContactForm/>
@@ -23,23 +31,35 @@ function ContactPage() {
 
     <div className='contact-page-right-section'>
       <div className='spacer-small'></div>
-      <h2>Contact Info</h2>
+      
       <div className='spacer-large'></div>
       <div className='contact-info'>
         <ul>
-          <li><strong>Email:</strong> your.email@example.com</li>
-          <li><strong>Phone:</strong> (123) 456-7890</li>
-          <li><strong>Location:</strong> Hartford, CT</li>
+            <li className='contact-info-item'>
+                <img src={emailIcon} alt="Email Icon"/>
+                <p>raw1218@gmail.com</p>
+            </li>
+            <li className='contact-info-item'>
+                <img src={phoneIcon} alt="Phone Icon"/>
+                <p>(203) 530 5946</p>
+            </li>
+            <li className='contact-info-item'>
+                <img src={locationIcon} alt="Location Icon"/>
+                <p>North Haven, CT</p>
+            </li>
+            <li className='contact-info-item'>
+                <img src={githubIcon} alt="Github Icon"/>
+                <p>github.com/raw1218</p>
+            </li>
+            <li className='contact-info-item'>
+                <img src={linkedInIcon} alt="LinkedIn Icon"/>
+                <p>linkedin.com/in/ron-wood-79b8001b5</p>
+            </li>
         </ul>
-      
- 
-      </div>
+    </div>
 
       <div className='spacer-small'></div>
-      <div className="social-buttons">
-            <button onClick={() => window.open('https://github.com/yourusername')}>GitHub</button>
-            <button onClick={() => window.open('https://linkedin.com/in/yourusername')}>LinkedIn</button>
-      </div>
+
       <div className='spacer-small'></div>
     </div>
 

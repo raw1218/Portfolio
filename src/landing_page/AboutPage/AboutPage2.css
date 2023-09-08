@@ -18,11 +18,13 @@
 }
 
 .spacer {
-    flex-grow: 1;  /* This will take up 1 part of the available space */
+    flex-grow: 1;
+    flex-shrink: 0;  /* This will take up 1 part of the available space */
 }
 
 .spacer.large {
-    flex-grow: 1.618;  /* This will take up 1.618 parts of the available space */
+    flex-grow: 1.618; 
+    flex-shrink: 0; /* This will take up 1.618 parts of the available space */
 }
 
 .about-page-right-section {
@@ -38,18 +40,22 @@
     align-content: center;
     justify-items: center;
     padding: 0 5%;
+    flex-direction: column;
+    
 }
 
 .resume-button, .contact-button {
     /* Add your individual button styling here */
-    padding: 1rem 1rem;
+    padding: 1rem 0.5rem;
     flex: 1;
+    flex-grow: 1.618;
     font-family: 'Courier New', Courier, monospace;
     background-color: transparent;
     color: lightgreen;
     border: 2px solid lightgreen;
     transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
     font-size: 20px;
+    
 }
 
 .resume-button:hover , .contact-button:hover{
