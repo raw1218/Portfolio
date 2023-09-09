@@ -61,7 +61,7 @@ const useWindowDimensions = () => {
               centerX: window.innerWidth / 2,
               centerY: window.innerHeight / 2,
               screenHeight: window.screen.height,
-              screenWidth: window.screen.width,
+              screenWidth: window.screen.width ,
               offsetX: window.screenX,
               offsetY: window.screenY,
           });
@@ -71,17 +71,14 @@ const useWindowDimensions = () => {
 
       
         window.addEventListener('resize', handleResize);
-        window.addEventListener('fullscreenchange', handleResize);
-        window.addEventListener('mozfullscreenchange', handleResize);  // For Firefox
-        window.addEventListener('webkitfullscreenchange', handleResize);  // For older versions of Safari and Chrome
-        window.addEventListener('msfullscreenchange', handleResize);  // For IE
+        window.addEventListener('zoom', handleResize);
+       
 
         return () => {
             window.removeEventListener('resize', handleResize);
-            window.removeEventListener('fullscreenchange', handleResize);
-            window.removeEventListener('mozfullscreenchange', handleResize);
-            window.removeEventListener('webkitfullscreenchange', handleResize);
-            window.removeEventListener('msfullscreenchange', handleResize);
+            window.addEventListener('zoom', handleResize);
+
+  
         };
     
 

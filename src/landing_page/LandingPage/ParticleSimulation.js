@@ -7,6 +7,11 @@ import { currentPageContext } from '../../App';
 function ParticleSimulation({hyperdriveToggled, setHyperdriveToggled}) {
     const { offsetX, offsetY, width, height,  screenWidth, screenHeight } = useContext(WindowDimensionsContext);
     
+    var canvasWidth = screenWidth;
+    var canvasHeight = screenHeight;
+    const xRatio = screenWidth / width;
+    const yRatio = screenHeight / height;
+
     const {currentPage} = useContext(currentPageContext)
 
     const [hyperdrivePercentage, setHyperdrivePercentage] = useState(0);
@@ -39,12 +44,11 @@ function ParticleSimulation({hyperdriveToggled, setHyperdriveToggled}) {
 
 
 
-
-    const [windowCenterX, setWindowCenterX] = useState((width / 2));
-    const [windowCenterY, setWindowCenterY] = useState((height / 2));
+    const [windowCenterX, setWindowCenterX] = useState(((width / 2 )* xRatio));
+    const [windowCenterY, setWindowCenterY] = useState(((height / 2) * yRatio));
     useEffect(() => {
-        setWindowCenterX((width / 2));
-        setWindowCenterY((height / 2));
+        setWindowCenterX(((width / 2) * xRatio));
+        setWindowCenterY(((height / 2) * yRatio));
     
         // Recalculate angles of all stars based on new center
         setStars(prevStars => prevStars.map(star => ({
@@ -57,7 +61,10 @@ function ParticleSimulation({hyperdriveToggled, setHyperdriveToggled}) {
 
     const canvasRef = useRef(null);
 
-    const STAR_DENSITY = 15; // Stars per 10,000 square pixels
+    var STAR_DENSITY = 15 ;// Stars per 10,000 square pixels
+
+
+    
 
     const calculateAngle = (x, y) => {
 
@@ -84,12 +91,12 @@ function ParticleSimulation({hyperdriveToggled, setHyperdriveToggled}) {
         });
     };
 
-    const [stars, setStars] = useState(createStars(screenWidth, screenHeight));
+    const [stars, setStars] = useState(createStars(canvasWidth, canvasHeight));
 
 const drawStars = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, screenWidth, screenHeight);
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     drawBackground(ctx);
     
@@ -100,7 +107,7 @@ const drawStars = () => {
         ctx.strokeStyle = "white";
         // Calculate distance from center
         const distanceFromCenter = Math.sqrt(Math.pow(star.x - windowCenterX, 2) + Math.pow(star.y - windowCenterY, 2));
-        const maxDistance = Math.sqrt(Math.pow(screenWidth, 2) + Math.pow(screenHeight, 2));
+        const maxDistance = Math.sqrt(Math.pow(canvasWidth, 2) + Math.pow(canvasHeight, 2));
         const distanceFactor = (distanceFromCenter * 2)/ maxDistance;
 
         if (hyperdrivePercentage > 0) {
@@ -126,7 +133,14 @@ const drawStars = () => {
             ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
             ctx.fill();
         }
+
+
+            
     });
+
+
+    
+   
 };
 
     
@@ -140,7 +154,7 @@ useEffect(() => {
 
             // Calculate distance from center for velocity adjustment
             const distanceFromCenter = Math.sqrt(Math.pow(star.x - windowCenterX, 2) + Math.pow(star.y - windowCenterY, 2));
-            const maxDistance = Math.sqrt(Math.pow(screenWidth, 2) + Math.pow(screenHeight, 2));
+            const maxDistance = Math.sqrt(Math.pow(canvasWidth, 2) + Math.pow(canvasHeight, 2));
             const distanceFactor = (distanceFromCenter * 2) / maxDistance;
             var velocity;
             // Update velocity in hyperdrive
@@ -157,9 +171,9 @@ useEffect(() => {
 
             
             star.opacity = 1;
-            if (newX < 0 || newX > screenWidth || newY < 0 || newY > screenHeight) {
-                newX = Math.random() * screenWidth;
-                newY = Math.random() * screenHeight;
+            if (newX < 0 || newX > canvasWidth || newY < 0 || newY > canvasHeight) {
+                newX = Math.random() * canvasWidth;
+                newY = Math.random() * canvasHeight;
                 const newAngle = calculateAngle(newX, newY);
                 return {
                     ...star,
@@ -179,23 +193,42 @@ useEffect(() => {
     return () => clearInterval(intervalId);
 }, [height, width, stars]);
 
+if(canvasRef.current){
+    const rect = canvasRef.current.getBoundingClientRect();
 
- 
+ console.log("canvas width = ", rect.width, "canvas height", rect.height);
+console.log("screen width = ", window.screen.width, "screen height = ", window.screen.height, "ration = ", window.devicePixelRatio)}
 
 //track mouse position
 const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+console.log("x ratio = ", xRatio);
+
+
+console.log(mousePosition)
 
 useEffect(() => {
     const handleMouseMove = (e) => {
         setMousePosition({ x: e.clientX, y: e.clientY });
     };
+
+    const handleTouchMove = (e) => {
+        const x = e.touches[0].clientX;
+        const y = e.touches[0].clientY;
+        setMousePosition({ x, y });  // note this change
+    };
+
+    // Attach the event listeners
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove);
     
     return () => {
+        // Cleanup the event listeners when the component is unmounted
         window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('touchmove', handleTouchMove);
     };
 }, []);
+
 
 
 
@@ -203,8 +236,11 @@ useEffect(() => {
 function drawBackground(ctx) {
     // First, fill the canvas with a semi-transparent (or opaque) overlay
     ctx.fillStyle = 'rgba(0, 0, 0, 1)'; // adjust opacity as required
-    ctx.fillRect(0, 0, screenWidth, screenHeight);
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     ctx.filter = 'blur(150px)'
+
+
+
     // Set up the shadow properties for the blur effect
  /*   ctx.shadowColor = 'black'; 
     ctx.shadowBlur = 3000;  // adjust the blur amount
@@ -214,7 +250,7 @@ function drawBackground(ctx) {
     // Use the "destination-out" global composite operation to "cut out" a blurry circle around the cursor
     ctx.globalCompositeOperation = 'destination-out';
     ctx.beginPath();
-    ctx.arc(mousePosition.x, mousePosition.y, 50, 0, Math.PI * 2, true); // Radius of 80, you can adjust as needed
+    ctx.arc(mousePosition.x * xRatio, mousePosition.y * yRatio, 80, 0, Math.PI * 2, true); // Radius of 80, you can adjust as needed
     ctx.fill();
 
     // Reset properties to default
@@ -235,8 +271,8 @@ function drawBackground(ctx) {
 
 
     return (
-        <div className="particleSimulationWrapper">
-            <canvas ref={canvasRef} className="particleSimulation" width={screenWidth} height={screenHeight}></canvas>
+        <div className="particleSimulationWrapper" >
+            <canvas ref={canvasRef} className="particleSimulation" width={canvasWidth} height={canvasHeight}></canvas>
         </div>
     );
 }
