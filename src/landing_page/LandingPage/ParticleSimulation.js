@@ -15,27 +15,7 @@ function ParticleSimulation({hyperdriveToggled, setHyperdriveToggled}) {
     };
 
 
-  /*  useEffect(() => {
-        const handleMouseDown = () => {
-            setHyperdriveToggled(true);
-            
-        };
-    
-        const handleMouseUp = () => {
-            setHyperdriveToggled(false);
-            
-        };
-    
-        window.addEventListener('mousedown', handleMouseDown);
-        window.addEventListener('mouseup', handleMouseUp);
-    
-        return () => {
-            window.removeEventListener('mousedown', handleMouseDown);
-            window.removeEventListener('mouseup', handleMouseUp);
-        };
-    }, []);
 
-    */
     useEffect(() => {
         if (hyperdriveToggled && hyperdrivePercentage < 1) {
             const interval = setInterval(() => {

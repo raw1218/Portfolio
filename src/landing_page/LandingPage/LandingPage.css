@@ -239,28 +239,50 @@
     .landing-page-main-text-overlay {
         z-index: 1;
         text-align: center;
+        justify-content: center;
         width: 100%;
         height: 30%;
+        margin: 5% 0;
+    }
+
+    .landing-page-main-text-overlay-upper{
+        margin-left: 0%;
+        margin-right: 0;
+        align-self: center;
+        justify-self: center;
+        grid-template-columns: 125px 1fr;
+        
     }
 
     .landing-page-main-text-overlay-upper{
         margin-left: 0;
         margin-right: 0;
+        margin-bottom: 5%;
     }
 
-    .landing-page-main-text-overlay-upper{
-        margin-left: 0;
-        margin-right: 0;
+    .landing-page-main-text-overlay-lower{
+        margin-left: 5%;
+        margin-top: 5%;
     }
 
 
     #Name, #Title {
-        font-size: 45px; /* Adjust to the size you want for mobile */
+        font-size: 40px; /* Adjust to the size you want for mobile */
         
     }
 
     #Title{
         font-size: 30px;
+    }
+    
+    #HelloWorld{
+        
+        white-space: nowrap;
+    }
+
+    .projects-page-button{
+        font-size: 20px;
+        overflow: default;
     }
 }
 

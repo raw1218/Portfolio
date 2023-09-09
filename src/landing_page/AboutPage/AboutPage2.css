@@ -7,13 +7,110 @@
 
 }
 
+.about-page-wrapper-mobile{
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.about-page-wrapper-mobile  p{
+ 
+    color: white;
+    font-size: 19px;
+    flex: 1;
+    padding: 0 5%;
+}
+
+.about-page-wrapper-mobile h1{
+    flex: 0.5;
+    color: white;
+    flex-shrink: 0.2;
+}
+
+.about-page-wrapper-mobile .displayed-skill-name{
+    
+    font-size: 25px;
+    
+
+}
+
+.about-page-wrapper-mobile .skill-carousel-wrapper{
+    
+    width: 100%;
+    height: 100%;
+    
+    
+    flex: 1.618;
+}
+
+.about-page-wrapper-mobile .displayed-skill-icons{
+
+    margin: 0;
+    padding: 0;
+    gap: 0;
+}
+.about-page-wrapper-mobile .displayed-skill-icon {
+    
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.about-page-wrapper-mobile .bio-buttons{
+    flex-direction: row;
+    flex: 0.5;
+    
+    width: 100%;
+   
+    
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    
+
+}
+
+.about-page-wrapper-mobile .resume-button , .about-page-wrapper-mobile .contact-button{
+    
+    height: 68%;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    
+
+    padding: 0;
+    margin: 0;
+}
+
+.about-page-wrapper-mobile .prev-button{
+   left: 2%;
+}
+
+.about-page-wrapper-mobile .next-button{
+    right: 2%;
+ }
+
+
+
+
+
 .about-page-left-section {
     display: flex;
     flex-direction: column;
  
     
     
-   /* background-color: #f0f0f0; /* Placeholder color */
+   width: 100%;
+   height: 100%;
    color: white;
 }
 
@@ -32,15 +129,17 @@
     align-items: center; /* Centers the skill carousel vertically */
     justify-content: center; /* And this centers it horizontally */
      /* Placeholder color */
+     width: 100%;
+     height: 100%;
 }
 
 .bio-buttons {
     display: flex;
     gap: 1rem; /* Space between buttons */
-    align-content: center;
-    justify-items: center;
+   
     padding: 0 5%;
     flex-direction: column;
+    flex-shrink: 0.2;
     
 }
 
@@ -48,7 +147,7 @@
     /* Add your individual button styling here */
     padding: 1rem 0.5rem;
     flex: 1;
-    flex-grow: 1.618;
+    
     font-family: 'Courier New', Courier, monospace;
     background-color: transparent;
     color: lightgreen;
@@ -69,6 +168,7 @@
     flex: 1;
     height: 75%;
     width: 100%;
+  
     
 }
 
@@ -78,9 +178,15 @@
     font-size: 300%;
 }
 
-.about-page-left-section p{
+.about-page-left-section p {
     font-size: 125%;
     padding: 0 5%;
+    
+    @media (max-width: 950px) {
+        /* styles for screens less than or equal to 750px */
+        font-size: 100%; /* example: reduce font size */
+        padding: 0 3%;   /* example: reduce padding */
+    }
 }
 
 
@@ -123,6 +229,8 @@
     background-color: transparent;
     border: none;
     z-index: 2;
+   
+    padding: 0;
 }
 
 .next-button::before, .prev-button::before {
@@ -144,6 +252,8 @@
     object-fit: cover; /* This will make the image cover the entire parent, possibly cropping it */
     display: block; 
     z-index: 3;
+    margin: 0;
+    padding: 0;
 }
 
 

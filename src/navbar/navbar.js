@@ -2,11 +2,14 @@ import React, { useState, useContext, useEffect } from 'react';
 import NavbarItem from './navbarItem';
 import { WindowDimensionsContext , currentPageContext} from '../App';  // Ensure correct path
 import './navbar.css'
+import { Transition } from 'react-transition-group';
 
-
+import menuIcon from '../images/SVGS/menu.svg'
+import backgroundImage from '../images/colorful-space-some-stars.jpg'
+import xIcon from '../images/SVGS/x.svg'
 
 const Navbar = () => {
-    const { width } = useContext(WindowDimensionsContext);
+    const { offsetX, offsetY, width, height,  screenWidth, screenHeight } = useContext(WindowDimensionsContext);
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [selectedKey, setSelectedKey] = useState(1);
 
@@ -27,20 +30,35 @@ const Navbar = () => {
 
     if (width <= mobileThreshold) {
         return (
-            <div className="navbar navbar-mobile">
-                <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}>Menu</button>
-
-                {isMobileMenuOpen && (
-                    <div className="navbar navbar-mobile-dropdown">
-                        <NavbarItem selectedKey = {selectedKey} keyID = {1} label="Home" onClick={() => {setSelectedKey(1); setCurrentPage('home')}} />
-                        <NavbarItem selectedKey = {selectedKey} keyID = {2} label="About Me"  onClick={() => {setSelectedKey(2); setCurrentPage('about')}}/>
-                        <NavbarItem selectedKey = {selectedKey} keyID = {3} label="Projects"  onClick={() => {setSelectedKey(3); setCurrentPage('projects')}} />
-                        <NavbarItem selectedKey = {selectedKey} keyID = {4} label="Contact"  onClick={() => {setSelectedKey(4); setCurrentPage('contact')}} />
-                    </div>
-                )}
+          <div className="navbar navbar-mobile">
+            <div className='navbar-menu-expandable' onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}>
+              <img src={isMobileMenuOpen ? xIcon : menuIcon} alt='expandable menu icon'></img>
             </div>
+            <Transition in={isMobileMenuOpen} timeout={{ enter: 50, exit: 500 }} >
+              {state => (
+                <div className={`navbar-expanded ${state}`}>
+                   
+                <div className='navbar-expanded-options'></div>
+                  <canvas className='navbar-expanded-background' style = {{width: screenWidth, height: screenHeight}}></canvas>
+                  
+
+
+                
+
+                </div>
+              )}
+            </Transition>
+          </div>
         );
-    } else {
+      }
+      
+    
+    
+    
+    else{
+
+
+
         return (
             <div className="navbar">
                     <NavbarItem selectedKey = {selectedKey} keyID = {1} label="Home" onClick={() => {setSelectedKey(1); setCurrentPage('home')}} />

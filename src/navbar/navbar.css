@@ -5,7 +5,25 @@
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     
+    width: 100%;
+    height: 100%;
     
+  
+    
+}
+
+.navbar.navbar-mobile{
+    width: 100%;
+    height: 100%;
+  
+    
+}
+
+.navbar-expanded{
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    color: white;
 }
 
 
@@ -37,5 +55,111 @@
     background-color: lightgreen;
     color: black;
     border-width: 0;
+
+}
+
+
+.navbar-menu-expandable {
+    flex: 0.3;
+    background-color: green;
+    border: none;
+    z-index: 3;
+
+    width: 75px;
+    height: 75px;
+
+   
+}
+
+.navbar-menu-expandable img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    margin: 0;
+    border: none;
+    padding: 1%;
+    box-sizing: border-box;
+   
+    
+    
+}
+
+.navbar-expanded{
+    background-color: red;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    transition: 0.3s;
+    z-index: 2;
+
+    overflow: hidden;
+    
+}
+
+.navbar-expanded.entering{
+    top: -100%;
+}
+
+.navbar-expanded.entered{
+    top:0%;
+}
+
+.navbar-expanded.exiting{
+    top:100%;
+}
+
+.navbar-expanded.exited{
+    display: none;
+}
+
+.navbar-expanded-background{
+    
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: 2;
+    transition: 0.3s;
+    background-color: red;
+    filter: blur(0px);
+
+    background: url('../images/colorful-space-some-stars.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    
+}
+
+.navbar-expanded-background img{
+    z-index: 1;
+    transform: scale(0.8);
+    width: 100%;
+    height: 100%;
+    
+
+  
+}
+
+
+.navbar-expanded.entering .navbar-expanded-background{
+    top: 100%;
+}
+
+.navbar-expanded.entered .navbar-expanded-background{
+    top: 0%;
+}
+
+.navbar-expanded.exiting .navbar-expanded-background{
+    top: -100%;
+}
+
+.navbar-expanded-options{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    z-index: 4;
+    
+    left: 50vw;
 
 }
