@@ -214,7 +214,7 @@ function drawBackground(ctx) {
     // Use the "destination-out" global composite operation to "cut out" a blurry circle around the cursor
     ctx.globalCompositeOperation = 'destination-out';
     ctx.beginPath();
-    ctx.arc(mousePosition.x, mousePosition.y, 100, 0, Math.PI * 2, true); // Radius of 80, you can adjust as needed
+    ctx.arc(mousePosition.x, mousePosition.y, 50, 0, Math.PI * 2, true); // Radius of 80, you can adjust as needed
     ctx.fill();
 
     // Reset properties to default

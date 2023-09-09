@@ -27,7 +27,7 @@
 }
 
 .about-page-wrapper-mobile h1{
-    flex: 0.5;
+    flex: 0.32;
     color: white;
     flex-shrink: 0.2;
 }

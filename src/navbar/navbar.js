@@ -28,6 +28,19 @@ const Navbar = () => {
     }, [currentPage])
 
 
+
+        function chooseOption(op){
+            setCurrentPage(op);
+
+            setTimeout(()=>{setMobileMenuOpen(false);}, 500);
+        }
+
+        const homeOptionClassName = 'navbar-expanded-option left ' + (currentPage === 'home' ? 'selected' : '')
+        const aboutOptionClassName = 'navbar-expanded-option right ' + (currentPage === 'about' ? 'selected' : '')
+        const projectsOptionClassName = 'navbar-expanded-option left ' + (currentPage === 'projects' ? 'selected' : '')
+        const contactOptionClassName = 'navbar-expanded-option right ' + (currentPage === 'contact' ? 'selected' : '')
+
+
     if (width <= mobileThreshold) {
         return (
           <div className="navbar navbar-mobile">
@@ -41,6 +54,21 @@ const Navbar = () => {
                 <div className='navbar-expanded-options'></div>
                   <canvas className='navbar-expanded-background' style = {{width: screenWidth, height: screenHeight}}></canvas>
                   
+
+                    
+                  <div className='navbar-expanded-option-menu'>
+                  <div className='spacer'></div>
+
+
+
+                    <div className={homeOptionClassName}><h2 onClick={()=>chooseOption('home')}>Home</h2></div>
+                    <div className={aboutOptionClassName}><h2 onClick={()=>chooseOption('about')}>About</h2></div>
+                    <div className={projectsOptionClassName}><h2 onClick={()=>chooseOption('projects')}>Projects</h2></div>
+                    <div className={contactOptionClassName}><h2 onClick={()=>chooseOption('contact')}>Contact</h2></div>
+
+
+
+                  </div>
 
 
                 

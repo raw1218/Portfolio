@@ -61,7 +61,7 @@
 
 .navbar-menu-expandable {
     flex: 0.3;
-    background-color: green;
+  
     border: none;
     z-index: 3;
 
@@ -160,6 +160,108 @@
     background-color: transparent;
     z-index: 4;
     
-    left: 50vw;
+    left: 0%;
+
+    display: flex;
 
 }
+
+
+.navbar-expanded-option-menu{
+
+    position: absolute;
+    flex: 1;
+    
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navbar-expanded-option{
+    flex:1;
+ 
+    
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+
+    height: min-content;
+
+    z-index: 5;
+   
+}
+
+.navbar-expanded-option h2{
+   
+    position:relative;
+    padding: 0;
+    margin: 0;
+    
+   
+
+    font-size: 250%;
+    height: min-content;
+   
+    transition: 0.3s ease-in-out;
+
+    
+  
+
+
+}
+
+.navbar-expanded-option.left h2{
+    left: -30%;
+}
+
+.navbar-expanded-option.right h2{
+    left: 30%;
+}
+
+.navbar-expanded-option h2:hover{
+    
+    color: black;
+    left: 0%;
+
+}
+
+.navbar-expanded-option.selected h2{
+}
+
+.navbar-expanded-option h2:hover::after{
+    
+    position: absolute;
+    content : '';
+    width:100%;
+    height:100%;
+    
+    z-index: 5;
+    left: 0%;
+
+    border-bottom: 4px solid black;
+
+    animation: borderAnimation 0.5s forwards;
+}
+
+
+
+
+@keyframes borderAnimation {
+
+    0%{
+        width: 0%;
+    }
+
+    100%{
+        width: 100%;
+    }
+}
+
+
