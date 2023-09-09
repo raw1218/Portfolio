@@ -230,7 +230,16 @@ useEffect(() => {
 }, []);
 
 
+var supportsCanvasFilter = function() {
+    var canvas = document.createElement('canvas');
+    if (!canvas.getContext) return false;
+    var ctx = canvas.getContext('2d');
+    return typeof ctx.filter === 'string';
+}
 
+
+
+const [filter,setFilter] = useState(supportsCanvasFilter() ? 'destination-out' : 'none')
 
 
 function drawBackground(ctx) {
@@ -248,7 +257,9 @@ function drawBackground(ctx) {
     ctx.shadowOffsetY = 0;
 */
     // Use the "destination-out" global composite operation to "cut out" a blurry circle around the cursor
-    ctx.globalCompositeOperation = 'destination-out';
+
+    
+    ctx.globalCompositeOperation = filter;
     ctx.beginPath();
     ctx.arc(mousePosition.x * xRatio, mousePosition.y * yRatio, 80, 0, Math.PI * 2, true); // Radius of 80, you can adjust as needed
     ctx.fill();
