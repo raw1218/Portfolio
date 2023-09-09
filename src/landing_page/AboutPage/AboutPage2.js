@@ -12,7 +12,7 @@ function AboutPage2() {
     const {currentPage, setCurrentPage} = useContext(currentPageContext);
 
     function openResume() {
-        window.open('/Ronald_Wood_Resume.pdf', '_blank');
+        window.open('raw1218.github.io/Portfolio/Ronald_Wood_Resume.pdf', '_blank');
     }
 
     function gotoContactPage(){
