@@ -16,6 +16,64 @@
     z-index: 1;
 }
 
+.contact-page-wrapper-mobile {
+    display: flex;
+    width: 100%;
+    height: 100%; /* This assumes you want it to take up the full viewport height */
+
+    z-index: 1;
+    color: white;
+  
+
+    flex-direction: column;
+}
+
+.contact-page-wrapper-mobile h1 {
+    flex: 0.32;
+}
+
+.contact-page-wrapper-mobile p{
+    flex:1;
+    margin: 0;
+    padding: 0 2%;
+}
+
+.contact-page-wrapper-mobile .contact-info  {
+    display: flex;
+    flex-direction: column;
+    flex: 0.5;
+    height: 15%;
+    position: relative;
+    padding: 5% 5%;
+    
+    gap: 0;
+    font-size: 13px;
+}
+
+.contact-page-wrapper-mobile .contact-info ul{
+    display: flex;
+    gap: 5%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.contact-page-wrapper-mobile .contact-info-item{
+    flex: 1;
+}
+
+
+.contact-page-wrapper-mobile .contact-form-wrapper{
+    flex: 1.618;
+    display: flex;
+}
+
+.contact-page-wrapper-mobile .contact-form{
+    flex: 1;
+}
+
+
+
 .contact-page-left-section {
     display: flex;
     flex-direction: column;
