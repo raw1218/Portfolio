@@ -14,6 +14,18 @@ const Navbar = () => {
     const [selectedKey, setSelectedKey] = useState(1);
 
 
+
+    const [dummyState, setDummyState] = useState(0);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setDummyState(prevState => prevState + 1);
+      }, 200);
+  
+      return () => clearTimeout(timer); // Cleanup the timeout if the component is unmounted
+    }, []);
+
+
     const mobileThreshold = 750; // or whatever pixel threshold you prefer
     
 
