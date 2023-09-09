@@ -145,7 +145,7 @@ function Project({project_obj}) {
     return (
         <div className='displayed-project'>
             
-            <h2 className='project-title'>{title}</h2>
+            <p className='project-title'>{title}</p>
             
             <div 
                 className='project-image-wrapper' 

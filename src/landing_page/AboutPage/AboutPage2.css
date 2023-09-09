@@ -217,6 +217,10 @@
 }
 
 
+.prev-button img{
+    transform: scaleX(-1);
+}
+
 
 .next-button, .prev-button {
     width: 5vw;  /* Percentage-based width */

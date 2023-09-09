@@ -24,6 +24,46 @@
     z-index: 1;
 }
 
+.projects-page-wrapper-mobile {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    flex-direction: column;
+    color: white;
+}
+
+.projects-page-wrapper-mobile h1 {
+    flex: 0.32;
+}
+
+.projects-page-wrapper-mobile p {
+
+    flex: 1;
+    margin: 0 2%;
+    padding: 0 2%;
+}
+
+.projects-page-wrapper-mobile .projects-wrapper{
+    display: flex;
+    position: relative;
+
+    overflow: hidden;
+}
+
+.projects-page-wrapper-mobile .projects-progress{
+    position: absolute;
+    left: 5%;
+    
+}
+
+.projects-page-wrapper-mobile .project-description{
+    font-size: 17px;
+    margin: 0% 2%;
+    margin-top: 5%;
+}
+
+
 .projects-page-right-section {
     
     /*background-color: #f0f0f0; /* Change this to any color you prefer */
@@ -179,6 +219,7 @@
     height: 100%;
     display: block; 
     z-index: 3;
+    object-fit: cover;
 }
 
 .projects-prev-button, .projects-next-button {
@@ -188,21 +229,40 @@
     z-index: 10;
     width: 5vw;
     height: 5vh;
+
+    padding: 0;
     /* ... other styles ... */
+}
 
 
+.projects-page-wrapper-mobile .projects-prev-button, .projects-page-wrapper-mobile .projects-next-button {
+
+    right: 5%;
+    left: 95%;
+}
+
+.projects-page-wrapper-mobile .projects-prev-button{
+    top: 60%;
+}
+
+.projects-page-wrapper-mobile .projects-next-button {
+    top: 40%;
 }
 
 .projects-prev-button img {
     width: 100%;
     height: 100%;
     z-index: 3;
+    transform: rotate(90deg);
+    object-fit: cover;
 }
 
 .projects-next-button img {
     width: 100%;
     height: 100%;
     z-index: 3;
+    transform: rotate(-90deg);
+    object-fit: cover;
 }
 
 .projects-next-button::before, .projects-prev-button::before {
@@ -460,10 +520,11 @@
 
     flex: 0.5;
     
-    
+    font-family: 'Courier New', Courier, monospace;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 30px;
   }
 
   .project-image-wrapper{
@@ -749,7 +810,7 @@
     background-color:rgba(0,0,0,0.7);
     color: lightgreen;
 
-    text-shadow: 0 0 10px lightgreen, 0 0 5px lightgreen; /* This creates the glow effect */
+   /* text-shadow: 0 0 10px lightgreen, 0 0 5px lightgreen; /* This creates the glow effect */
 
     box-shadow: 0 0 10px lightgreen, 0 0 5px black; /* This creates the glow effect */
 
@@ -782,6 +843,10 @@
     text-shadow: none;
 }
 
+.projects-page-wrapper-mobile .view-code-button.special, .projects-page-wrapper-mobile .view-demo-button.special{
+    font-size: 15px;
+}
+
 .view-code-button.special:hover{
     color:lightgreen;
     box-shadow: none;
@@ -795,7 +860,7 @@
     
     color: white;
 
-    text-shadow: 0 0 10px white, 0 0 5px white; /* This creates the glow effect */
+   /* text-shadow: 0 0 10px white, 0 0 5px white; /* This creates the glow effect */
 
     box-shadow: 0 0 10px white, 0 0 5px white;
     letter-spacing: 5px;
@@ -811,7 +876,7 @@
     background-color:rgba(0,0,0,0.7);
     color: white;
 
-    text-shadow: 0 0 10px white, 0 0 5px white; /* This creates the glow effect */
+   /* text-shadow: 0 0 10px white, 0 0 5px white; /* This creates the glow effect */
 
     box-shadow: 0 0 10px white, 0 0 5px black; /* This creates the glow effect */
 
@@ -851,7 +916,7 @@
    /* background-color:white;*/
     color: lightgreen;
 
-   text-shadow: 0 0 5px lightgreen, 0 0 2px lightgreen; /* This creates the glow effect */
+  /* text-shadow: 0 0 5px lightgreen, 0 0 2px lightgreen; /* This creates the glow effect */
 
     box-shadow: 0 0 10px lightgreen, 0 0 5px lightgreen; /* This creates the glow effect */
 

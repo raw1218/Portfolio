@@ -194,7 +194,7 @@ function Skills() {
 
           </animated.div>
           <button onClick={prevSkill} className="prev-button">
-            <img src = {leftArrow}></img>
+            <img src = {rightArrow}></img>
           </button>
           <button onClick={nextSkill} className="next-button">
             <img src = {rightArrow}></img>

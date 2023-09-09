@@ -16,8 +16,8 @@ import webApp2Long from '../../images/ProjectImages/WebApp2Long2.PNG'
 import moreProjects1 from '../../images/ProjectImages/blueprint.jpg'
 import moreProjects2 from '../../images/ProjectImages/coding.jpg'
 
-import upArrow from '../../images/SVGS/upArrow.svg'
-import downArrow from '../../images/SVGS/downArrow.svg'
+import upArrow from '../../images/SVGS/rightArrow.svg'
+import downArrow from '../../images/SVGS/rightArrow.svg'
 
 function Projects() {
  
